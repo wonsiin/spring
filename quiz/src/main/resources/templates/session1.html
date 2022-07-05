@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>값을 입력하기!</title>
+<script defer src="quiz.js"></script>
+</head>
+<body>
+	<h2>값을 입력하기!</h2>
+	<br>
+	<h2>질문과 답변을 입력하세요!</h2>
+	<br>
+	<form id="input1" method="get">
+		<ol>
+			<li>
+				<p>질문을 작성해 주세요</p><br>
+				<textarea id="text" placeholder="퀴즈를 입력해 주세요." style="width: 800px; height: 300px; resize: none;" ></textarea>
+				<ol>
+					<input id="br" type="button" value="다음줄">
+				</ol>
+			</li>
+		</ol>
+		<input type="hidden" id="he" value="0">
+		<ol>
+			<li>
+				<p>내용 및 문제를작성해 주세요</p><br>
+				<textarea id="text1" placeholder="내용을 입력해 주세요." style="width: 800px; height: 300px; resize: none;" ></textarea>
+				<p>정답번호를 입력하세요 : <input id = "sekai" type="text"></p>
+			</li>
+			<ol>
+				<input id="br1" type="button" value="다음줄">
+				<input id="mun" type="button" value="문제출제">
+				<input type="submit" value="작성완료">
+				<a href="/quiz">돌아가기</a>
+			</ol>
+		</ol>
+	</form>
+</body>
+</html>
