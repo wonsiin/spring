@@ -1,10 +1,9 @@
 package net.softsociety.quiz.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import net.softsociety.quiz.vo.Quiz;
 
 @Controller
 public class session {
@@ -12,12 +11,16 @@ public class session {
 	public String session1() {
 		return "session1";
 	}
-	@GetMapping("/session1/input1")
-	public String input1(String[] naio1,String[] naio2,int sekai) {
-		for(int i = 0; i < naio1.length; i++) {
-			System.out.println(naio1 + " " + naio2 + " " + sekai);
-		}
-		return "quiz";
+	@PostMapping("/input1")
+	public String input1(String naio1,String naio2,int sekai, Model  model) {
+			System.out.println(naio1);
+			System.out.println(naio2);
+			System.out.println(sekai);
+			
+			model.addAttribute("naio1", naio1);
+			model.addAttribute("naio2", naio2);
+			model.addAttribute("sekai", sekai);
+		return "session2";
 	}
 	
 	@GetMapping({"/session2"})

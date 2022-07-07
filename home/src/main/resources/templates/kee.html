@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div{
+		width: 1000px;
+		height: 800px;
+		border: 1px solid #000;
+		border-radius: 20px;
+		text-align: center;
+	}
+	p{
+		font-size: 50px;
+		text-align: center;
+	}
+	input{
+		width : 250px;
+		height : 67px;
+		font-size : 40px;
+		margin-bottom : 10px;
+		text-align: center;
+	}
+	select{
+		font-size : 50px;
+		width: 104px;
+		height: 74px;
+		text-align: center;
+	}
+	table {
+	width: 1000px;
+	height: 200px;
+	text-align: center;
+}
+a{
+	font-size: 50px;
+}
+	
+
+	
+</style>
+</head>
+<body>
+	<form action="input1" method="post" onsubmit="return check()">
+		<div id="calcForm">
+			<p>계산이다냥!</p>
+			<talbe id ="tob1">
+				<th>
+					<input id="num1" name="num1" type="text" placeholder="숫자입력1">
+					<select name="keke" id="keke">
+						<option value="+">+</option>
+						<option value="-">-</option>
+						<option value="*">*</option>
+						<option value="/">/</option>
+					</select> <input id="num2" name="num2" type="text" placeholder="숫자입력2">
+				</th>
+			</talbe>
+			<br> 
+			<br> 
+			<br> 
+			<table id = "tab">
+				<th>
+					<input type="submit" value="계산">
+					<a href="../home">뒤로가기</a>
+				</th>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

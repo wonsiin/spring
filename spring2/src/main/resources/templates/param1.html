@@ -2,35 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>spring2</title>
 </head>
 <body>
-	<h1>[ GET method로 parameter 전달 ]</h1>
+	<h2>[GET method로 parameter 전달]</h2>
+
 	<form action="input1" method="get">
-		<div>
-			<table>
-				<ol>
-					<li>이름 :
-						<ui>
-							<input id="name" name="name" type="text">
-						</ui>
-					</li>
-					<li>전화 : 
-						<ui>
-							<input name="phone" type="radio" value="KT" checked="checked">
-							<label for ="kt">KT</label>
-							<input name="phone" type="radio" value="SK">
-							<label for ="sk">SK</label>
-							<input name="phone" type="radio" value="LG">
-							<label for ="lg">LG</label>
-							<input name="phonenum" type="text">
-						</ui>
-					</li>
-					<input type="submit" value="전송">
-					<input type="reset" value="초기화">
-				</ol>	
-			</table>
-		</div>
+	<p>이름 <input type="text" name="name"></p>
+	<p>전화
+		<input type="radio" name="phone" value="kt">KT
+		<input type="radio" name="phone" value="sk">SKT
+		<input type="radio" name="phone" value="lg">LGT
+		<input type="text" name="phonenum">
+	</p>
+	<p>
+		<input type="submit" value="전송">
+		<input type="reset" value="초기화">
+	</p>
 	</form>
 </body>
 </html>
