@@ -11,10 +11,12 @@ window.onload = function(){
 	let mon = document.getElementById("mon");
 	let totod = document.getElementById("totod");
 	
-//mon.onclick = function(){
-//	let 
-//	tala1.innerHTML = 
-//}
+	naio1.addEventListener("keyup", function(event){
+		if(event.keyCode === 13){
+			event.preventDefault();
+			document.getElementById("naio1").click();
+		}
+	})
 	
 	totod.onclick = function(){
 		naio1.value = naio1.value + "<br>"

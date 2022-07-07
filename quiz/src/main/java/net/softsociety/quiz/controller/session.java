@@ -13,10 +13,6 @@ public class session {
 	}
 	@PostMapping("/input1")
 	public String input1(String naio1,String naio2,int sekai, Model  model) {
-			System.out.println(naio1);
-			System.out.println(naio2);
-			System.out.println(sekai);
-			
 			model.addAttribute("naio1", naio1);
 			model.addAttribute("naio2", naio2);
 			model.addAttribute("sekai", sekai);
