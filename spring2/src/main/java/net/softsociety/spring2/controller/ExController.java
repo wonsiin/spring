@@ -106,7 +106,4 @@ public class ExController {
 		
 		return "exview/infoOutput";
 	}
-
-	
-
 }

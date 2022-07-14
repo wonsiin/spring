@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>값을 입력하기!</title>
@@ -14,15 +14,16 @@
 		<ol>
 			<li>
 				<p>질문을 작성해 주세요</p><br>
-				<textarea id="naio1" name="naio1" placeholder="퀴즈를 입력해 주세요." onkeypress="enterkey(e)" style="width: 800px; height: 300px; resize: none;" ></textarea>
+				<textarea id="naio1" name="naio1" placeholder="퀴즈를 입력해 주세요." onkeypress="addEventListener(String,event)" style="width: 800px; height: 300px; resize: none;"></textarea>
 			</li>
 		</ol>
+		<input id="br" type="button" value="다음줄">
 		<input type="hidden" id="he" value="0">
 		<ol>
 			<li>
 				<p>내용 및 문제를작성해 주세요</p><br>
-				<textarea id="naio2" name="naio2" placeholder="내용을 입력해 주세요." onkeypress="enterkey(e)" style="width: 800px; height: 300px; resize: none;" ></textarea>
-				<p>정답번호를 입력하세요 : <input id = "sekai" name="sekai" type="text"></p>
+				<textarea id="naio2" name="naio2" onkeypress="addEventListener(String,event)" style="width: 800px; height: 300px; resize: none;" ></textarea>
+				<p>정답번호를 입력하세요 : <input id = "sekai" name="sekai" type="password"></p>
 			</li>
 			<ol>
 				<input id="mun" type="button" value="문제출제">

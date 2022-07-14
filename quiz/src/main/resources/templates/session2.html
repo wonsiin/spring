@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>문제 풀기!!</title>
@@ -19,15 +19,19 @@
 			</th>
 			<th>
 				<td>
-					<p id="tala1">[[${naio1}]]</p>
+					<p id="tala1" th:utext="|${naio1}|" ></p>
 				</td>
 			</th>
+		</table>
+		<table>
 			<th>
 				<td>
-					<p id="tala2">[[${naio2}]]</p>
+					<p id="tala2" th:utext="${naio2}"></p>
 				</td>
 			</th>
 			<br>
+		</table>
+		<table>
 			<th>
 				<p>정답은 : <label id="result"></label></p>
 				<input id="mon" type="button" value="문제받기">

@@ -6,6 +6,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 @Controller
@@ -72,62 +73,18 @@ public class CookieController {
 	
 	@GetMapping("/ck/cookie")
 	public String cookie(HttpServletResponse res,
-			@CookieValue(name="str")String str,
-			@CookieValue(name="num") int num,
-			@CookieValue(name="count1") int count1,
-			@CookieValue(name="count2") int count2){
-		String str1= str;
-		String[] str2 = new String[1];
-		int num1= num;
-		int num2[] = new int[1];
+			@CookieValue(name="count", defaultValue = "0") int count,
+			Model model){
 		
+		count++;
+		model.addAttribute("count",count);
 		
+		Cookie cookid = new Cookie("count", Integer.toString(count));
+		cookid.setMaxAge(60*60*24*365);
+		res.addCookie(cookid);
 
-		//str에 대하여
-		if(str1 != null) {
-			str2[0] = str1;
-			for(int j = 0; j < str2.length; j++) {
-				if(str2[j] == null) {
-					str2[j] = str1;
-				}
-				if(str2[j] != null) {
-					for(int i = 0; i < str2.length; ++i) {
-						if(str2[i] == str1) {
-							count1 += 1;
-						}else {
-							str2[i] = str1;
-						}
-					}
-				}
-			}
-		}
-		//num에 대하여
-		if(num1 != 0) {
-			num2[0] = num1;
-			for(int j = 0; j < num2.length; j++) {
-				if(num2[j] == 0) {
-					num2[j] = num1;
-				}
-				if(num2[j] != 0) {
-					for(int i = 0; i < num2.length; ++i) {
-						if(num2[i] == num1) {
-							count2 += 1;
-						}else {
-							num2[i] = num1;
-						}
-					}
-				}
-			}
-		}
-		
-		
+		System.out.println("쿠키1 : " + count + "번째 방문 감사합니다.");
 
-		System.out.println("쿠키1 : " + str1 +" " + count1 + "번째 방문 감사합니다.");
-		System.out.println("쿠키2 : " + num1 +" " + count2 + "번째 방문 감사합니다.");
-		
-		
-		res.addCookie(count1);
-		res.addCookie(count2);
 		return "redirect:/";
 	}
 

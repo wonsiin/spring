@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>계산 결과</title>
+<link rel="stylesheet" th:href="@{/css/css1.css}">
+<script defer th:src="@{/js/js1.js}"></script>
+</head>
+<body>
+	<h2 id="titi">타임리프 1</h2>
+	<h3>문자열 출력</h3>
+	<p>[[${str}]]</p>
+	<p>[[${num}]]</p>
+	<p>[[${member}]]</p>
+	<p>[[${member.id}]]</p>
+	<p>[[${tag}]]</p>
+	<p>[[${url}]]</p>
+	
+	<!-- p태그 안에 [[${str}]] 값을 p 사이에 넣어줌 -->
+	<!-- < = &lt; < = &gt; 
+	띄어쓰기 넣고싶으면 = &nbsp; -->
+	<p th:text="${str}">p태그 사이의 문자열</p>
+	<p th:text="${tag}"></p>
+	<p th:utext="${str}"></p>
+	<p th:utext="${tag}"></p>
+	<!--/* th:text : 기호가 보여지게 결과가 출력
+			th:utext : 기호도 같이 처리되어 태그결과가 출력 */-->
+	<h3>주석</h3>
+	<!--/* 확실히 그냥 주석은 실행시 내부가 보인다. */-->
+	<!--/* ctrl + shift + / */-->
+	
+	<!-- <p>[[${str}]]</p> -->
+	<!--<p th:text="${str}"></p> -->
+	
+	<!--/* 실행 항목을 빼버리는 주석이다. */-->
+	<!--/* <p>[[${str}]]</p> */-->
+	<!--/* <p th:text="${str}"></p> */-->
+	
+	<h3>연산자</h3>
+	<p th:text="${num}">1000</p>
+	<!--/* 산술 연산자 : +, - , / , * , % */-->
+	<p th:text="${num + 1}">1000</p>
+	<!-- /* 비교 연산자 : 
+	
+	< > <= >= == != ||| 
+	
+	-------------------------------------------
+	< = (lt) , > =  (gt), <= = (le), >= = (ge),
+	== = (eq), != = (ne)
+	 -------------------------------------------
+	 
+	 */ -->
+	<p th:text="${num > 100}">true</p>
+	<p th:text="${num gt 100}">true</p>
+	<p th:text="${num eq 100}">true</p>
+	<!-- /* 논리 연산자 : and or not */ -->
+	<p th:text="${num >= 1 and num <= 100}">true</p>
+	<p th:text="${num ge 1 and num le 100}">true</p>
+	
+	<h3>경로 생성과 하이퍼링크</h3>
+	<p><a href="http://www.naver.com">네이버로 이동</a></p>
+	<p><a href="../param/param1">get방식의 Form으로 이동</a></p>
+	<p><a href="/string2/param/param1">get방식의 Form으로 이동</a></p>
+	<p>[[@{/param/param1}]]</p>
+	<p><a th:href="@{/param/param1}">get방식의 Form으로 이동</a></p>
+	<!-- /* 
+	경로 생성 기호 : @ [[@{/param/param1}]] 
+	해당 경로를 알려준다. 
+	th:href="@{/param/param1}" 로 사용가능.
+	앞으로 경로 표현은 @{/param/param1} 로 사용
+	*/ -->
+	<!-- /* [예 : http://localhost:8002/spring2/th/thymeleaf1]*/ -->
+	<!-- /* [예 : http://localhost:8002/spring2/img/a.jpg]*/ -->
+	<!-- /* 
+	1. 이미지 파일을 /static/img 폴더에 저장후 불러오기
+	2. css 파일을 /static/css 폴더에 저장후 불러오기
+	3. js 파일을 /static/js 폴더에 저장후 불러와 함수 호출
+	 */ -->
+	<p><a th:href="@{/img/dog5.jpg}">이미지</a></p>
+	<p><img src="" th:src="@{/img/dog5.jpg}" alt="불러온사진">이미지</a></p>
+	
+	<h3>객체 출력</h3>
+	<p th:text="${member}">객체 출력</p>
+	<p th:text="${member.id}"></p>
+	<p th:text="${date}"></p>
+	
+	
+	
+	<ul th:object="${member}">
+		<li th:text="*{id}">아이디</li>
+		<li th:text="*{name}">이름</li>
+		<li th:text="*{password}">비밀번호</li>
+	</ul>
+	<!-- /* 객체 불러올때 ${} 기호를 사용 
+	객체를 하나하나 출력을 할때사용 */ -->
+	
+	
+	<h3>포매팅</h3>
+	<p th:text="${n1}"></p>
+	<p th:text="${n2}"></p>
+	<p th:text="${n3}"></p>
+	<p th:text="${date}"></p>
+	
+	<p th:text="${#numbers.formatInteger(n1,10)}"></p>
+	<!-- /* n1의 값을 10자리를 표현해라 라는 의미(앞에 0으로 표시 : 0010000000)*/ -->
+	<p th:text="${#numbers.formatInteger(n1,3,'COMMA')}"></p>
+	<!-- /* 3자리마다 추가해라 (10,000,000) */ -->
+	<p th:text="${#numbers.formatDecimal(n1,3,'COMMA', 2, 'POINT')}"></p>
+	<!-- /* 소수점 아래 2자리수를 짤라라! (10,000,000.00) */ -->
+	<!-- /* COMMA 부분에 WHITESPACE, NONE 으로 넣어도 된다. */ -->
+	<p th:text="${#numbers.formatDecimal(n2,3,'COMMA', 2, 'POINT')}"></p>
+	<!-- /* 본래 값 123.45678 = 123.46 */ -->
+	<p th:text="${#numbers.formatPercent(n3,0,2)}"></p>
+	<!-- /* 본래 값 0.5 = 50.00% */ -->
+	<p th:text="${#dates.format(date,'yyyy/MM/dd HH')}"></p>
+	<!-- /* 1번째 : 타입, 2번째 : 타입
+	(대소문자 확인필수[소문자 mm = 분, 대문자 MM = 월, HH = 시간(24시간기준)
+	hh = 시간(12시간 기준) ] */ -->
+	
+</body>
+</html>
