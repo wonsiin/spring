@@ -1,11 +1,15 @@
 --spring3 예제의 테이블 생성
 
 CREATE TABLE person(
-    name VARCHAR2(20),
+    name VARCHAR2(20) primary key,
     age NUMBER(2)
 );
 
 --저장 예
-insert into person values ('홍길동',11);
+insert into person values ('혜민',50);
+insert into person values ('aa',80);
+insert into person values ('bb',40);
+insert into person values ('cc',3);
 
+commit;
 drop TABLE person;

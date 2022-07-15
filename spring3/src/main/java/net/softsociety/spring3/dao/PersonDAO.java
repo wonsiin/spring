@@ -1,5 +1,7 @@
 package net.softsociety.spring3.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import net.softsociety.spring3.vo.Person;
@@ -9,4 +11,15 @@ import net.softsociety.spring3.vo.Person;
 public interface PersonDAO {
 	
 	public int insertPerson(Person person);
+	
+	public int deletePerson(String name);
+	
+	public int deletePerson1(String name1);
+
+	public ArrayList<Person> selectPerson();
+
+	public Person selectPerson1(String name);
+
+	public int updatePerson(Person person);
+	
 }

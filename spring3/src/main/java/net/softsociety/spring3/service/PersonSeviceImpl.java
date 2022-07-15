@@ -1,6 +1,10 @@
 package net.softsociety.spring3.service;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -30,5 +34,43 @@ public class PersonSeviceImpl implements PersonService {
 		 
 		return result;
 	}
+	
+	@Override
+	public int deletePerson(String name) {
+
+		int result = personDAO.deletePerson(name);
+		
+		 
+		return result;
+	}
+	
+	@Override
+	public int deletePerson1(String name1) {
+
+		int result = personDAO.deletePerson1(name1);
+		 
+		return result;
+	}
+
+	@Override
+	public ArrayList<Person> selectPerson() {
+		ArrayList<Person> result = personDAO.selectPerson();
+		return result;
+	}
+	
+	@Override
+	public Person selectPerson1(String name) {
+		Person result = personDAO.selectPerson1(name);
+		return result;
+	}
+	
+	@Override
+	public int updatePerson(Person person) {
+		int result = personDAO.updatePerson(person);
+		 
+		return result;
+	}
+	
+	
 
 }

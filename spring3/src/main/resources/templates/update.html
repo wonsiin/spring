@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2> 이름 : [[${name}]] , 나이 : [[${age}]] 님의 정보 입니다.</h2><!-- th:value="${pserson.name}"  th:value="{pserson.age}"-->
+	<h1>[ 수정 ]</h1>
+		<form action="update" method="post">
+			<p>이름<input name ="name" type="text" th:value ="${name}"  readonly="readonly"></p>
+			<p>나이<input name ="age" type="number" th:value ="${age}" ></p>
+			<p><input type="submit" value="수정"></p>
+		</form>
+</body>
+</html>

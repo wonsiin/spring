@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table{
+		border: 3px solid black;
+		border-collapse: collapse;
+	}
+	td,th{
+		text-align:center;
+		width:150px;
+		border: 0.2px solid black;
+		padding: 0px;
+		
+	}
+</style>
+<script>
+/* 	let a = [[${date1}]];
+		숫자는 잘 읽혀진다.
+	let b = '[[${date2}]]';
+	불러올 값이 문자는 양옆에 '' 를 넣어줘야한다.
+	alert(b);
+	alert(a); */
+	function deletePerson(name){
+			/* alert(location.href); */
+		if(confirm('정말 삭제하시겟습니까?')) {
+			location.href ='delete2?name=' + name;
+		}
+	}
+			
+	function updatePerson(name){
+		location.href ='update?name=' + name;
+	}
+</script>
+</head>
+<body>
+	<h1>[ 직원 조회 ]</h1>
+		<form action="select" method="get">
+			<table>
+				<tr>
+					<td>이름</td>
+					<td>나이</td>
+					<td>수정</td>
+					<td>삭제</td>
+				</tr>
+				<tr th:each="item : ${list}">
+					<td>
+						<span th:text="${item.name}"></span>
+					</td>
+					<td>
+						<span th:text="${item.age}"></span>
+					</td>
+					<td>
+						<input type="button" value="수정" 
+						th:pname="${item.name}" th:onclick="updatePerson(this.getAttribute('pname'))">
+					</td>
+					<td>								
+						<input type="button" value="삭제" 
+						th:pname="${item.name}" th:onclick="deletePerson(this.getAttribute('pname'))">
+						<!-- 속성 											현재 pname값을 가져온다.-->											
+ 						<a th:href="|javascript:location.href= 'delete?name=${item.name}'|">삭제</a>
+ 						<!-- 자바스크립트로직접 연결하여 삭제를 바로 처리하는 방법 -->
+					</td>
+				</tr>
+			</table>
+		</form>
+					<p><input type="submit" value="조회"></p>
+					<p><a href="http://localhost:8003/spring3/">뒤로가기</a></p>
+</body>
+</html>
