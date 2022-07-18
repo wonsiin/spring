@@ -1,0 +1,14 @@
+CREATE TABLE guestbook(
+    num number primary key,
+    name VARCHAR2(20) NOT null,
+    password VARCHAR2(20) NOT null,
+    message VARCHAR2(1000) NOT null,
+    inputdate date default sysdate
+);
+
+select * from guestbook;
+
+drop TABLE TEAM;
+drop sequence guestbook_seq;
+
+create sequence guestbook_seq;

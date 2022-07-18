@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	form{
+		width: 800px;
+		height: 800px;
+		text-align: left;
+	}
+	#kuku {
+		text-align: left;
+	}
+	span {
+		width: 800px;
+		border-bottom: 1px solid block;
+	}
+	#abc{
+		border-bottom: 2px solid black;
+		width: 160px;
+	}
+	#mu {
+		text-align: center;
+	}
+</style>
+<script >
+window.onload = function(){
+	let kiku = document.getElementById("kiku");
+	
+	kiku.onclick=function(){
+		location.href = "http://localhost:8004/spring4/kiku";
+	}
+}
+</script>
+</head>
+<body>
+	<form action="passGguestbook" method="post">
+		<h2>[ 방명록 ]</h2>
+		<input id="kiku" name="kiku" type="button" value="글쓰기">
+		<table th:each="loo : ${list}">
+				<tr>
+					<td id="abc"></td>
+					<td id="abc"></td>
+				</tr>
+				<tr>
+					<td id="mu">작성자 :</td>
+					<td th:text="${loo.name}"></td>
+				</tr>
+				<tr>
+					<td id="mu">작성일 :</td>
+					<td th:text="${loo.inputdate}"></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td th:text="${loo.message}"></td>
+				</tr>
+				<tr>
+					<td id="mu">비밀번호 :</td>
+					<td><input type="password" name="password"></td>
+					<td><input type="submit" value="삭제"></td>
+				</tr>
+				<tr>
+					<td id="abc"></td>
+					<td id="abc"></td>
+				</tr>
+		</table>
+	</form>
+</body>
+</html>

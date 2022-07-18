@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	form{
+		width: 350px;
+		height: 300px;
+		text-align: center;
+	}
+	td{
+		width: 150px;
+		text-align: left;
+		font-weight: bold;
+	}
+	
+</style>
+</head>
+<body>
+	<form action="insert" method="post">
+		<h2>[ 방명록 글쓰기 ]</h2>
+		<table>
+			<tr>
+				<td>이름 </td>
+				<td><input id="name" type="text" name ="name"></td>
+			</tr>
+			<tr>
+				<td>비밀번호 </td>
+				<td><input id="password" type="password" name ="password"></td>
+			</tr>
+			<tr>
+				<td>내용 </td>
+				<td><textarea id="message" name="message" cols="30" rows="6"></textarea></td>
+			</tr>
+		</table>
+		<input type="submit" value="저장">
+	</form>
+</body>
+</html>
