@@ -33,17 +33,22 @@ public class GuestbookController {
 			 * person.getAge());
 			 */
 			model.addAttribute("list", list);
-
-			log.debug("조회결과: {}", list);
-
-		
+			log.debug("조회결과: 2{}", list);
 		return "bang";
+	}
+	
+	@GetMapping({"/bang2"})
+	public String bang2(Model model) {
+		ArrayList<Guestbook> list = service.selectGuestbook();
+			model.addAttribute("list", list);
+			log.debug("조회결과: 2{}", list);
+		return "bang2";
 	}
 	
 	
 	@PostMapping({"/insert"})
 	public String insertGuestbook(Guestbook guestbook) {
-		log.debug("전달된 값 : {}",guestbook);
+		log.debug("전달된 값 1: {}",guestbook);
 		
 		service.insertGuestbook(guestbook);
 		
@@ -51,32 +56,23 @@ public class GuestbookController {
 	}
 	
 	@PostMapping({ "/delete" })
-	public String delete(int num) {
-		log.debug("전달된 값 : {}", num);
-		int result = service.deleteGuestbook(num);
+	public String delete(Guestbook guestbook) {
+		log.debug("전달된 값 oo : {}", guestbook);
+		int result = service.deleteGuestbook(guestbook);
 
-		if (result == num) {
-			log.debug("값이 없습니다.");
-		} else {
-			log.debug("{} 삭제 성공", num);
-		}
-
-		return "redirect:/";
+		return "redirect:/bang";
 	}
 	
-	@PostMapping({ "/passGguestbook" })
-	public String passGguestbook(String password) {
-		log.debug("전달된 값 : {}", password);
-		int result = service.passGuestbook(password);
+	/*
+	 * @PostMapping({ "/passGguestbook" }) public String passGguestbook(String
+	 * password) { log.debug("전달된 값 : {}", password); int result =
+	 * service.passGuestbook(password);
+	 * 
+	 * if (result == 0) { log.debug("비밀번호가 아닙니다."); }else { delete(result); }
+	 * 
+	 * return "redirect:/"; }
+	 */
 
-		if (result == 0) {
-			log.debug("비밀번호가 아닙니다.");
-		}else {
-			delete(result);
-		}
-
-		return "redirect:/";
-	}
 
 	
 }

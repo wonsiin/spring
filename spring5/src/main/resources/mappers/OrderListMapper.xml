@@ -1,0 +1,24 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring5.dao.OrderListDAO">
+
+<select id="selectorderlist" resultType="OrderList">
+select * from orderlist
+</select>
+
+<insert id="insert1" parameterType="OrderList">
+INSERT INTO orderList
+(order_num,id, name, address,p_name,p_amount,p_price,num)
+values
+(orders_seq.nextval,#{id},#{name},#{address},#{p_name},#{p_amount},#{p_price},#{num})
+</insert>
+
+<delete id="deleteorder" parameterType="int">
+delete from orderlist where order_num = ${order_num}
+</delete>
+
+
+
+</mapper>

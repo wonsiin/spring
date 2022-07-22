@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ID 중복 확인</title>
+<style>
+	body {
+		text-align: center;
+	}
+	form {
+		text-align: center;
+	}
+	table {
+		margin: auto;
+
+	}
+</style>
+<script>
+
+function idFormOpen(){
+	let memberid = document.getElementById("memberid");
+	let fform = document.getElementById("fform");
+	
+	fform.submit();
+	
+}
+
+function inputId(id){
+	opener.document.getElementById('memberid').value = id;
+	alert(opener.document.getElementById('memberid').value)
+	this.close(); 
+}
+</script>
+</head>
+<body>
+	<h2>[ ID 중복 확인 ]</h2>
+	<form action="idcheck" method="post" id="fform">
+		검색할 ID
+		<input type="text" name="memberid" id="memberid" maxlength="10" placeholder="ID중복확인 이용">
+		<input type="button" value="검색" onclick="idFormOpen()">
+	</form>
+	<div th:if="${memberid} != null">
+		<div th:if="${reslut}">	<!-- true를 의미 -->
+			<p>[[${memberid}]] : 사용가능한 아이디 입니다.</p>
+			<p><input type="button" value="확인" th:id= "${memberid}"
+			onclick="inputId(this.getAttribute('id'))"></p>
+		</div>
+		<div th:if="${not reslut}"> <!-- false를 의미 -->
+			<p>[[${memberid}]] : 이미 사용중인 아이디 입니다.</p>
+		</div>
+	</div>
+</body>
+</html>

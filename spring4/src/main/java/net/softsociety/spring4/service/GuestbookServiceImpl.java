@@ -30,21 +30,20 @@ public class GuestbookServiceImpl implements GuestbookService{
 	}
 	
 	@Override
-	public int deleteGuestbook(int num) {
+	public int deleteGuestbook(Guestbook guestbook) {
 
-		int result = guestbookDAO.deleteGuestbook(num);
-		
+		int result = guestbookDAO.deleteGuestbook(guestbook);
 		 
 		return result;
 	}
 	
-	@Override
-	public int passGuestbook(String password) {
-
-		int result = guestbookDAO.passGuestbook(password);
-		
-		 
-		return result;
-	}
+	/*
+	 * @Override public int passGuestbook(String password) {
+	 * 
+	 * int result = guestbookDAO.passGuestbook(password);
+	 * 
+	 * 
+	 * return result; }
+	 */
 
 }

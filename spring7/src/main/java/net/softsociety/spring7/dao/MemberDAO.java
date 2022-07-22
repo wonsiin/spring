@@ -1,0 +1,15 @@
+package net.softsociety.spring7.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import net.softsociety.spring7.domain.Member;
+
+@Mapper
+public interface MemberDAO {
+	
+	int insert(Member member);
+
+	boolean idcheck(String memberid);
+
+	Member selectOne(String memberid);
+}

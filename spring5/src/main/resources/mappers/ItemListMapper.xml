@@ -1,0 +1,16 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring5.dao.ItemListDAO">
+
+<select id="selectGuestbook" resultType="ItemList">
+	select * from itemlist
+</select>
+
+<select id="selectGuestbook1" resultType="ItemList" parameterType="int">
+	select * from itemlist where p_num = #{p_num}
+</select>
+
+
+</mapper>

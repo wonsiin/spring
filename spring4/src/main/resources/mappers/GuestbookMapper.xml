@@ -14,13 +14,12 @@
 select * from Guestbook
 </select>
 
-<select id="passGuestbook" parameterType="String" resultType="int">
+<!-- <select id="passGuestbook" parameterType="String" resultType="int">
 select num from Guestbook where password = #{password}
-</select>
+</select> -->
 
-
-<delete id="deleteGuestbook" parameterType="int">
-	delete Guestbook where num = #{num}
+<delete id="deleteGuestbook" parameterType="Guestbook">
+	delete Guestbook where num = #{num} and password=#{password}
 </delete>
 
 </mapper>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table{
+		border: 0.2px dotted gray;
+		border-collapse: collapse;
+		
+	}
+	td,th{
+		text-align:center;
+		width:120px;
+		border: 0.2px dotted rgb(89, 89, 89);
+	}
+	th {
+		font-size : 20px;
+		background-color: rgb(0, 255, 255);
+	}
+</style>
+<script>
+	window.onload = function(){
+		let order_num = document.getElementById("order_num");
+		let id = document.getElementById("id");
+		let name = document.getElementById("name");
+		let address = document.getElementById("address");
+		let num = document.getElementById("num");
+		let p_name = document.getElementById("p_name");
+		let p_amount = document.getElementById("p_amount");
+		let p_price = document.getElementById("p_price");
+		let butt = document.getElementById("butt");
+		let buttton = document.getElementById("buttton");
+		
+		let a = id.value;
+		/* +","+ name.value+","+ address.value +","
+		+ p_name.value +","+ p_amount.value +","+ p_price.value  +","+ num.value; */
+		let b = name.value;
+		let c = address.value;
+		let d = p_name.value;
+		let e = p_amount.value;
+		let f = p_price.value;
+		let g = num.value;
+		
+		butt.onclick = function(){
+		buttton.submit();
+			
+		}
+		/* butt.onclick = function(){
+		location.href="http://localhost:8005/spring5/dam?id=" + a +"&name="+b+"&address="+
+				c+"&p_name="+d+"&p_amount="+e+"&p_price="+f+"&num="+g;
+		} */
+	}
+	
+	/* function sele(p_num){
+		location.href="http://localhost:8005/spring5/orderlist?p_num=" + p_num;
+		alert(p_num)
+	} */
+</script>
+
+</head>
+<body>
+
+	<h1>제품 상세보기</h1>
+	<form th:action="@{/import1}" method="post" id="buttton">
+			<input type="hidden" name="order_num" value="1" id="order_num">
+			<input type="hidden" name="id" value="shopping123" id="id">
+			<input type="hidden" name="name" value="홍길동" id="name">
+			<input type="hidden" name="address" value="서울시 강남구" id="address">
+			<input type="hidden" name="num" th:value="${list.p_num}" id="num">
+			<input type="hidden" name="p_name" th:value="${list.p_name}" id="p_name">
+			<input type="hidden" name="p_amount" th:value="${list.amount}" id="p_amount">
+			<input type="hidden" name="p_price" th:value="${list.price}" id="p_price">
+	</form>
+			<table>
+					<tr>
+						<th>제품번호</th> 
+						<td><span th:text="${list.p_num}"></span></td>
+					</tr>
+					<tr>
+						<th>이름</th>
+						<td><span th:text="${list.p_name}"></span></td>
+					</tr>
+					<tr>
+						<th>남은 수량</th>
+						<td><span th:text="${list.amount}"></span></td>
+					</tr>
+					<tr>
+						<th>가격</th>
+						<td><span th:text="${list.price}"></span></td>
+					</tr>
+					<tr>	
+						<th>비고</th>
+						<td>
+							<input type="button" value="담기" id="butt">
+						</td>
+					</tr>
+			</table>
+		
+</body>
+</html>
+							<!-- th:pname="${list.p_num}" th:onclick="sele(this.getAttribute('pname'))"> -->

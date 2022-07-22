@@ -1,0 +1,35 @@
+--spring7 테이블 구조
+
+--회원 정보
+create table spring7_member(
+	memberid varchar2(20) primary key,						                                                                                            --맴버id    		사용자 식별id, 	유일값. 문자열 최대20byte.
+	memberpw varchar2(100) not null,						                                                                                            --맴버 비밀번호 	사용자 비밀번호 	필수. 문자열 100byte.
+	membername varchar2(20) not null,						                                                                                          	--맴버 이름		사용자 이름		
+	email varchar2(50), 								                                                                                                        	--이메일			사용자 메일		50byte
+	phone varchar2(13),									                                                                                                      	--폰번호			사용자 폰번호
+	address	varchar2(100),							                                            	                                                        	--주소			사용자 주소
+	enabled number(1) DEFAULT 1 check (enabled IN('0','1')) ,	                                                                --계정상태			사용자 상태 숫자1자리, 1은 사용가능, 0은 사용불가능
+	rolename varchar2(20) DEFAULT 'ROLE_USER' check (rolename IN('ROLE_USER','ROLE_ADMIN'))
+);
+
+insert into spring7_member values 
+('aaa','111','홍길동','aaa@aaa.com',
+'010-1111-1111','서울시 삼성동',1,'ROLE_USER');
+
+insert into spring7_member 
+(memberid, memberpw, membername) values ('bbb','222','김철수');
+
+--게시판 글
+
+
+
+
+
+
+
+--게시글의 댓글
+
+
+
+
+

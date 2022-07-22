@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring7.dao.MemberDAO">
+
+
+<insert id="insert" parameterType="Member">
+	insert into
+		spring7_member
+	(
+		memberid
+		,memberpw
+		,membername
+		,email
+		,phone
+		,address
+	)
+	values
+	(
+		#{memberid}
+		,#{memberpw}
+		,#{membername}
+		,#{email}
+		,#{phone}
+		,#{address}
+	)
+</insert>
+<!-- 회원정보 조회 -->
+<select id="selectOne" parameterType="String" resultType="Member">
+	select * from spring7_member where memberid = #{memberid}
+</select>
+
+
+
+</mapper>

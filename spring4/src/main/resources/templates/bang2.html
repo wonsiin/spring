@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#kuku {
+		text-align: left;
+	}
+	span {
+		width: 800px;
+		border-bottom: 1px solid block;
+	}
+	#abc{
+		border-bottom: 2px solid black;
+		width: 160px;
+	}
+	#mu {
+		text-align: center;
+	}
+</style>
+<script>
+function deleteGuestbook(n) {
+	let inputPassword = document.getElementById('pw' + n);
+	let form = document.getElementById('deleteForm');
+	let num = document.getElementById('num');
+	let password = document.getElementById('password');
+	
+	if(confirm('삭제?')){
+		num.value = n;
+		password.value= inputPassword.value;
+		form.submit();
+	}
+}
+	
+</script>
+</head>
+<body>
+<h2>[ 방명록 2 ]</h2>
+
+<p><a th:href="@{/kiku}" th:text="글쓰기"></a></p>
+<p><input type="button" th:onclick="|location.href='@{kiku}'|" th:value="글쓰기"></p>
+
+<!-- 삭제시 서버로 전송할 폼 -->
+<form th:action="@{/delete}" method="post" id="deleteForm">
+	<input type="hidden" name="num" value="" id="num">
+	<input type="hidden" name="password" value="" id="password">
+</form>
+
+	<table th:each="loo : ${list}">
+			<tr>
+				<td id="abc"></td>
+				<td id="abc"></td>
+			</tr>
+			<tr>
+				<td id="mu">작성자 :</td>
+				<td th:text="${loo.name}"></td>
+			</tr>
+			<tr>
+				<td id="mu">작성일 :</td>
+				<td th:text="${loo.inputdate}"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td th:text="${loo.message}"></td>
+			</tr>
+			<tr>
+				<td>
+					<label>비밀번호 :</label>
+					<input type="password" th:id="|pw${loo.num}|">
+					<input type="button" value="삭제" th:num="${loo.num}" th:onclick="deleteGuestbook(this.getAttribute('num'))" id="pw">
+					<!-- num의 값을 찾아서 보내준다. -->
+				</td>
+			</tr>
+			<tr>
+				<td id="abc"></td>
+				<td id="abc"></td>
+			</tr>
+	</table>
+</body>
+</html>

@@ -1,0 +1,72 @@
+ <!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table{
+		border: 3px solid white;
+		border-collapse: collapse;
+		
+	}
+	td,th{
+		text-align:center;
+		width:150px;
+		border: 0.2px solid white;
+		padding: 0px;
+	}
+	td.won {
+		font-size : 20px;
+		background-color:rgb(0, 255, 255);
+	}
+</style>
+<script>
+	function saa(a){
+		location.href="delete1?order_num=" + a;
+	}
+</script>
+</head>
+<body>
+	<h1>장바구니 목록</h1>
+	<table>
+		<tr>
+			<td class="won">제품번호</td>
+			<td class="won">아이디</td>
+			<td class="won">이름</td>
+			<td class="won">주소</td>
+			<td class="won">상품이름</td>
+			<td class="won">수량</td>
+			<td class="won">가격</td>
+			<td class="won"></td>
+		</tr>
+		<tr th:each="item : ${list}">
+				<td>
+					<span th:text="${item.num}"></span>
+				</td>
+				<td>
+					<span th:text="${item.id}"></span>
+				</td>
+				<td>
+					<span th:text="${item.name}"></span>
+				</td>
+				<td>
+					<span th:text="${item.address}"></span>
+				</td>
+				<td>
+					<span th:text="${item.p_name}"></span>
+				</td>
+				<td>
+					<span th:text="${item.p_amount}"></span>
+				</td>
+				<td>
+					<span th:text="${item.p_price}"></span>
+				</td>
+				<td>
+					<input type="hidden" name="${item.order_num}" th:value="${item.order_num}">
+					<input type="button" value="삭제" 
+					th:num="${item.order_num}" th:onclick="saa(this.getAttribute('num'))">
+				</td>
+		</tr>
+	</table>
+</body>
+</html>

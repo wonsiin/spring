@@ -5,19 +5,22 @@
 <title>Insert title here</title>
 <style>
 	form{
+		width: 800px;
+		height: 800px;
 		text-align: left;
 	}
 	#kuku {
 		text-align: left;
 	}
 	span {
+		width: 800px;
 		border-bottom: 1px solid block;
 	}
 	#abc{
 		border-bottom: 2px solid black;
 		width: 160px;
 	}
-	td.mu {
+	#mu {
 		text-align: center;
 	}
 </style>
@@ -32,42 +35,36 @@ window.onload = function(){
 </script>
 </head>
 <body>
-	<h2>[ 방명록 ]</h2>
-	<input id="kiku" name="kiku" type="button" value="글쓰기">
-	
+	<form action="deleGguestbook" method="post">
+		<h2>[ 방명록 ]</h2>
+		<input id="kiku" name="kiku" type="button" value="글쓰기">
 		<table th:each="loo : ${list}">
 				<tr>
 					<td id="abc"></td>
 					<td id="abc"></td>
 				</tr>
 				<tr>
-					<td class="mu">작성자 :</td>
-					<td th:text="${loo.name}" th:name="name"></td>
+					<td id="mu">작성자 :</td>
+					<td th:text="${loo.name}"></td>
 				</tr>
 				<tr>
-					<td class="mu">작성일 :</td>
-					<td th:text="${loo.inputdate}" th:name="inputdate"></td>
+					<td id="mu">작성일 :</td>
+					<td th:text="${loo.inputdate}"></td>
 				</tr>
 				<tr>
-					<td class="mu"></td>
-					<td th:text="${loo.message}" th:name="message"></td>
+					<td></td>
+					<td><pre th:text="${loo.message}"></pre></td>
 				</tr>
 				<tr>
-					<td class="mu">
-						<form th:action="@{/delete}" method="post">	
-							<!-- <input type="hidden" name="num" value="${loo.num}"> -->
-							<input type="hidden" name="num" th:value="${loo.num}">
-							<label>비밀번호 :</label>
-							<input type="password" name="password">
-							<input type="submit" value="삭제">
-						</form>
-					</td>
+					<td id="mu">비밀번호 :</td>
+					<td><input type="password" name="password"></td>
+					<td><input type="submit" value="삭제"></td>
 				</tr>
 				<tr>
 					<td id="abc"></td>
 					<td id="abc"></td>
 				</tr>
 		</table>
-	
+	</form>
 </body>
 </html>

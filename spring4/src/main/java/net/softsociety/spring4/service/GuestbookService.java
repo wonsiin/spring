@@ -10,7 +10,7 @@ public interface GuestbookService {
 	
 	public ArrayList<Guestbook> selectGuestbook();
 	
-	public int deleteGuestbook(int num);
+	public int deleteGuestbook(Guestbook guestbook);
 	
-	public int passGuestbook(String password);
+	/* public int passGuestbook(String password); */
 }
