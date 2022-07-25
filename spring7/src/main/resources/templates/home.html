@@ -1,17 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h2>[ spring7 ]</h2>
+	<!-- <ul>
+		<li><a th:href="@{member/join}">회원가입</a></li>
+		<li><a th:href="@{member/loginForm}">로그인</a></li>
+		<li><a th:href="@{logout}">로그아웃</a></li>
+		<li><a href="">개인정보 수정</a></li>
+		<li><a href="">게시판</a></li>
+	</ul> -->
+	<div sec:authorize="isAuthenticated()">
+		<ul>
+			<li><a th:href="@{logout}">로그아웃</a></li>
+			<li><a href="">이미지 보기</a></li>
+			<li><a href="">개인정보 수정</a></li>
+			<li><a href="">게시판</a></li>
+		</ul>
+		<p sec:authorize="hasRole('USER')">일반사용자입니다.</p><!-- 'ROLE_USER' -->
+		<p sec:authorize="hasRole('ADMON')">관리자입니다.</p><!-- 'ROLE_ADMIN' -->
+		<p sec:authentication="name"></p>
+		<p sec:authentication="principal"></p>
+		<p sec:authentication="principal.authorities"></p>
+	</div>
+	
+	<div sec:authorize="not isAuthenticated()">
 	<ul>
 		<li><a th:href="@{member/join}">회원가입</a></li>
-		<li><a href="">로그인</a></li>
-		<li><a href="">로그아웃</a></li>
+		<li><a th:href="@{member/loginForm}">로그인</a></li>
+		<li><a th:href="@{logout}">로그아웃</a></li>
 		<li><a href="">개인정보 수정</a></li>
 		<li><a href="">게시판</a></li>
 	</ul>
+	</div>
+	
 </body>
 </html>

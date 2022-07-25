@@ -25,7 +25,7 @@ public class MemberController {
 		return "join";
 	}
 	
-	@PostMapping({"insert"})
+	@PostMapping({"/insert"})
 	public String insert(Member member,Model model) {
 		log.debug("총값은 1 =" + member);
 		service.insert(member);
@@ -50,7 +50,16 @@ public class MemberController {
 		return "/idcheck";
 	}
 	
+	@GetMapping("/loginForm")
+	public String loginForm() {
+		return "/loginForm";
+	}
 	
+	@PostMapping("/login")
+	public String login(Member member,Model model) {
+		log.debug("전달받은값은 =" + member);
+		return "redirect:/";
+	}
 	
 	
 	

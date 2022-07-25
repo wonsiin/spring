@@ -44,6 +44,7 @@ public class ItemListController {
 	
 	@PostMapping({"/import1"})
 	public String dam(OrderList orderlist) {
+		log.debug("값 : " +orderlist);
 		service1.insert1(orderlist);
 		return "redirect:/";
 	}
