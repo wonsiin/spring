@@ -31,6 +31,19 @@
 	select * from spring7_member where memberid = #{memberid}
 </select>
 
-
+<!-- 회원정보수정 -->
+<update id="update" parameterType="Member">
+<!-- 회원아이디를 조건으로 이름/이메일/전화/주소를 수정 -->
+	update spring7_member set 
+	membername=#{membername}
+	,email=#{email}
+	,phone=#{phone}
+	,address=#{address} 
+	<if test="memberpw != null and memberpw != ''">
+	, memberpw = #{memberpw}
+	</if>
+	where 
+	memberid = #{memberid}
+</update>
 
 </mapper>

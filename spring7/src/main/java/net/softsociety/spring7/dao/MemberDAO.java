@@ -12,4 +12,8 @@ public interface MemberDAO {
 	boolean idcheck(String memberid);
 
 	Member selectOne(String memberid);
+	
+	Member getMemberInfo(String id);
+	
+	int update(Member member);
 }

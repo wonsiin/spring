@@ -8,5 +8,7 @@ public interface MemberService {
 
 	boolean idcheck(String memberid);
 
+	Member getMemberInfo(String id);
 
+	int update(Member member);
 }

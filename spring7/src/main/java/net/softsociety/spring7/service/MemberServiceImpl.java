@@ -33,4 +33,19 @@ public class MemberServiceImpl implements MemberService{
 		result = member == null ? true : false;
 		return result;
 	};
+	
+	@Override
+	public Member getMemberInfo(String id) {
+		return memberDAO.selectOne(id);
+	}
+	
+	@Override
+	public int update(Member member) {
+		if(member.getMemberpw() != "" && member.getMemberpw() != null) {
+			String encodedPassword = passwordEncoder.encode(member.getMemberpw());	//사용자가 입력한 비번을 암호화시킨다.
+			member.setMemberpw(encodedPassword);	
+		}
+		int result = memberDAO.update(member);
+		return result;
+	}
 }

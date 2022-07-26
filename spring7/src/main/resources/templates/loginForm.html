@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.errorMsg{
+	color: red;
+	font-weight: bold;
+	
+	}
+</style>
 </head>
 <body>
 	<h1>로그인</h1>
@@ -11,6 +18,15 @@
 		PW <input type="text" name="memberpw">
 		<br>
 		<input type="submit" value="전달">
+		 
+		<td class="white"></td>
+		<td class="white">
+			<div class="errorMsg" th:if="${param.error}">ID 또는 비밀번호가 틀렸습니다.</div>
+			<div th:if="${param.error}"><script>alert('ID 또는 비밀번호가 틀렸습니다.')</script></div>
+			<!-- 스크립트 사용이 가능 -->
+		</td>
+		
 	</form>
+		
 </body>
 </html>
