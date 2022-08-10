@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<style>
+
+	th {
+		background-color: #e6e6e6;
+		width: 150px;
+	}
+	td {
+		background-color: #f2f2f2;
+	}
+</style>
+<script>
+	function idFormOpen() {
+//		window.open('http://www.naver.com', 'win', 'left=600,top=300,width=400,height=300,menubar=no'); // (1)주소 (2)창의 이름 : 이름이 같으면 열려있는 창에 내용만 바뀜 이름이 다르면 새로운 창 // 새 창을 강제로 열 때
+		window.open('idcheck', 'win', 'left=600,top=300,width=400,height=300,menubar=no') // http://localhost:8888/spring6/member/join : join 대신에 idcheck
+	}
+</script>
+</head>
+<body>
+	<h1>[ 회원가입 ]</h1>
+	<form id="joinform" action="join" method="post" onsubmit="return vaildation();">
+	<table>
+		<tr>
+			<th>아이디</th>
+			<td>
+				<input type="text" name="memberid" id="memberid" maxlength="10" placeholder="ID 중복확인 이용" readonly="readonly">
+				<input type="button" value="ID중복확인" onclick="idFormOpen()"> <!-- 자바스크립트엔 id가 필요 -->
+			</td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td><input type="password" name="memberpw" id="memberpw" placeholder="비밀번호 입력"><br>
+			<input type="password" id="memberpw2" placeholder="비밀번호 다시 입력"></td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td><input type="text" name="membername" id="membername" placeholder="이름 입력"></td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td><input type="text" name="email" id="email" placeholder="이메일 입력"></td>
+		</tr>
+		<tr>
+			<th>전화번호</th>
+			<td><input type="text" name="phone" id="phone" placeholder="전화번호 입력"></td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td><input type="text" name="address" id="address" placeholder="주소 입력" style="width: 250px;"></td>
+		</tr>
+		<tr>
+			<th colspan="2" style="background-color: white">
+				<input type="submit" value="가입" name="joinButton">
+				<input type="reset" value="다시쓰기" name="resetButton">
+			</th>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>
+
+<!-- 회원가입 - 가입 폼에 ID~주소까지 입력하고 "가입"버튼 클릭하면 Controller에서 log출력
+(ID는 3~10자, 비밀번호는 3~10자 2번 입력받아 확인, 이름 필수)->JavaScript로 확인 -->

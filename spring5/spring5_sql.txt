@@ -1,0 +1,60 @@
+--spring5 테이블 구조
+DROP TABLE spring5_member;
+
+--회원정보
+CREATE TABLE spring5_member
+(
+	memberid VARCHAR2(20) PRIMARY KEY,					--사용자 식별 ID. 유일한 값. 문자열 20byte.
+	memberpw VARCHAR2(100) NOT NULL,					--로그인할 때 비밀번호. 필수. 문자열 100byte.
+	membername VARCHAR2(20) NOT NULL,					--사용자이름
+	email VARCHAR2(50),									--이메일주소 
+	phone VARCHAR2(20),									--전화번호
+	address VARCHAR2(100),								--집주소
+	enabled	NUMBER DEFAULT 1 CHECK(enabled IN(1, 0)),	--계정상태.숫자1자리. 1은 사용가능(기본값). 0은 사용불가능 아이디.(휴먼,차단일 경우
+	rolename VARCHAR2(20) DEFAULT 'ROLE_USER' CHECK(rolename IN('ROLE_USER', 'ROLE_ADMIN'))	--문자열20byte. 'ROLE_USER'(기본값), 'ROLE_ADMIN'중 하나.
+);
+
+SELECT * FROM spring5_member;
+
+-- -----------------------------------------------------------------------------------------------------------------------------
+DROP TABLE spring5_reply;
+DROP TABLE spring5_board;
+DROP SEQUENCE spring5_reply_seq;
+DROP SEQUENCE spring5_board_seq;
+
+--게시판 글
+CREATE TABLE spring5_board
+(
+	boardnum    NUMBER          PRIMARY KEY,    --글번호
+    memberid    VARCHAR2(20)    REFERENCES spring5_member(memberid),    --작성자
+    title       VARCHAR2(300)   NOT NULL,       --제목
+    contents    VARCHAR2(4000)  NOT NULL,       --내용
+    inputdate   DATE DEFAULT SYSDATE,           --작성시간
+    hits        NUMBER DEFAULT 0,               --조회수
+    originalfile    VARCHAR2(300),              --첨부파일의 원래 이름
+    savedfile       VARCHAR2(100)              --서버에 저장된 이름
+);
+
+--게시글 번호에 사용할 시퀀스
+CREATE SEQUENCE spring5_board_seq;
+
+SELECT * FROM spring5_board ORDER BY boardnum DESC;
+
+--게시글의 댓글
+CREATE TABLE spring5_reply
+(
+    replynum    NUMBER PRIMARY KEY,     --리플 일련번호
+    boardnum    NUMBER REFERENCES spring5_board(boardnum) ON DELETE CASCADE,    --본문 글번호
+    memberid    VARCHAR2(20) REFERENCES spring5_member(memberid),               --작성자
+    replytext   VARCHAR2(200) NOT NULL, --글내용
+    inputdate   DATE DEFAULT SYSDATE    --작성시간
+);
+
+--댓글 번호에 사용할 시퀀스
+CREATE SEQUENCE spring5_reply_seq;
+
+SELECT * FROM spring5_reply;
+
+SELECT boardnum, title, memberid, hits, TO_CHAR(inputdate, 'YYYY-MM-DD') AS inputdate
+FROM spring5_board
+ORDER BY boardnum;

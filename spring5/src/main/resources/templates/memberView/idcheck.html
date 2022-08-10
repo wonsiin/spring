@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div {
+		text-align: center;
+	}
+</style>
+<script>
+	function inputId(id) {
+		/* alert(id); */
+		opener.document.getElementById('memberid').value = id; //바깥쪽 창의 id창에 넣고
+		this.close(); //현재창은 닫음
+	}
+</script>
+</head>
+<body>
+	<header>
+		<h1>[ ID 중복 확인 ]</h1>
+	</header>
+	<div>
+		<form action="idcheck" method="post" onsubmit="return vaildaion()">
+		<p>검색할 ID <input type="text" name="searchId" id="searchId">
+				   <input type="submit" value="검색"></p>
+		</form>
+		
+		
+		<div th:if="${searchId} != null"> <!-- 검색한 아이디를 받아서 model에 저장한 이름 -->
+			<div th:if="${result}"> <!-- 가져온 결과가 true냐 false냐 -->
+				<p><span th:text="${searchId}"></span> : 사용가능한 ID입니다.</p>
+				<p><input type="button" value="ID사용하기"
+					th:searchId="${searchId}" onclick="inputId(this.getAttribute('searchId'))"></p> <!-- abc 'abc'와 같음 -->
+			</div>
+			<div th:if="${not result}"> <!-- result가 false가 왔다! -->
+				<p><span th:text="${searchId}"></span> : 이미 사용중인 ID입니다.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

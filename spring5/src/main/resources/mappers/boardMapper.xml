@@ -1,0 +1,155 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.softsociety.spring5.dao.BoardDAO">
+
+<!-- 게시글 저장 (파일명 나중에 추가) -->
+<insert id="writeBoard" parameterType="Board">
+	INSERT INTO spring5_board
+		(
+			boardnum
+			, memberid
+			, title
+			, contents
+			<if test="originalfile != null and originalfile != ''">
+			, originalfile
+			, savedfile
+			</if>
+		)
+		VALUES
+		(
+			spring5_board_seq.NEXTVAL
+			, #{memberid}
+			, #{title}
+			, #{contents}
+			<if test="originalfile != null and originalfile != ''">
+			, #{originalfile}
+			, #{savedfile}
+			</if>
+		)
+</insert>
+
+<!-- 글개수 -->
+<select id="count" parameterType="map" resultType="int">
+	SELECT 
+		count(*)
+	FROM
+		spring5_board
+	<if test="type != null and searchWord != null">
+	<where>
+		<if test="type == 'title'">
+			UPPER(title) like '%' || UPPER(#{searchWord}) || '%'
+		</if>
+		<if test="type == 'contents'">
+			UPPER(contents) like '%' || UPPER(#{searchWord}) || '%'
+		</if>
+		<if test="type == 'memberid'">
+			UPPER(memberid) like UPPER(#{searchWord})
+		</if>
+		<if test="type == 'all'">
+			UPPER(title) like '%' || UPPER(#{searchWord}) || '%'
+			OR UPPER(contents) like '%' || UPPER(#{searchWord}) || '%'
+			OR UPPER(memberid) like UPPER(#{searchWord})
+		</if>
+	</where>
+	</if>
+</select>
+
+<!-- 글목록 -->
+<select id="selectAll" parameterType="map" resultType="Board">
+	SELECT 
+		boardnum
+		, title
+		, memberid
+		, hits
+		, TO_CHAR(inputdate, 'YY-MM-DD') AS inputdate
+	FROM
+		spring5_board
+		<!-- 전달된 값에 따라서 sql 변경 -> 동적 sql --> <!-- 검색어가 넘어왔는지부터 확인 -->
+	<if test="type != null and searchWord != null"> <!-- true, false가 나오는 조건식 --> <!-- vo : 변수명 map : key -->
+	<where> <!-- 조건이 하나도 안남으면 where도 지움 -->
+		<if test="type == 'title'"> <!-- 넘어왔다는 게 확인이 되면 타입에 들어있는 문자열 내용을 보면 알 수 있음 -> if문으로 확인 -->
+			UPPER(title) like '%' || UPPER(#{searchWord}) || '%'
+		</if>
+		<if test="type == 'contents'">
+			UPPER(contents) like '%' || UPPER(#{searchWord}) || '%'
+		</if>
+		<if test="type == 'memberid'">
+			UPPER(memberid) like UPPER(#{searchWord})
+		</if>
+		<if test="type == 'all'">
+			UPPER(title) like '%' || UPPER(#{searchWord}) || '%'
+			OR UPPER(contents) like '%' || UPPER(#{searchWord}) || '%'
+			OR UPPER(memberid) like UPPER(#{searchWord})
+		</if>
+	</where>
+	</if>
+	ORDER BY
+		boardnum DESC
+</select>
+
+<!-- 게시글 읽기 -->
+<select id="selectOne" parameterType="int" resultType="Board">
+	SELECT * FROM spring5_board WHERE boardnum = #{boardnum}
+</select>
+
+<!-- 조회수 1 증가 -->
+<update id="updateHits" parameterType="int">
+	UPDATE spring5_board
+	SET	hits = hits + 1
+	WHERE boardnum = #{boardnum}
+</update>
+
+<select id="selectTotal" resultType="int">
+	SELECT COUNT(boardnum)
+	FROM spring5_board
+</select>
+
+<delete id="delete" parameterType="Board">
+	DELETE FROM spring5_board
+	WHERE
+		boardnum = #{boardnum}
+		AND
+		memberid = #{memberid}
+</delete>
+
+<update id="update" parameterType="Board">
+	UPDATE spring5_board
+	SET 
+	FROM
+</update>
+
+<insert id="insertReply" parameterType="Reply">
+	INSERT INTO spring5_reply
+	(
+	replynum
+	, boardnum
+	, memberid
+	, replytext
+	)
+	VALUES
+	(
+	spring5_reply_seq.NEXTVAL
+	, #{boardnum}
+	, #{memberid}
+	, #{replytext}
+	)
+</insert>
+
+<select id="selectReply" parameterType="int" resultType="Reply">
+	SELECT * FROM spring5_reply WHERE boardnum = #{boardnum} ORDER BY inputdate DESC
+</select>
+
+<select id="selectOneReply" parameterType="int" resultType="Reply">
+	SELECT * FROM spring5_reply WHERE boardnum = #{boardnum} AND replynum = #{replynum}
+</select>
+
+<delete id="deleteReply" parameterType="Reply">
+	DELETE FROM spring5_reply
+	WHERE
+		replynum = #{replynum}
+		AND
+		memberid = #{memberid}
+</delete>
+</mapper>
