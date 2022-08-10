@@ -18,7 +18,7 @@
 		<ul>
 			<!-- <li sec:authorize="inAuthenticated()"><a th:href="@{member/"></a> 개인정보 수정</li> -->
 			<li><a th:href="@{member/mypage}"> 개인정보 수정</a></li>
-			<li><a th:href="@{member/gesi}">게시판</a></li>
+			<li><a th:href="@{/board/list}">게시판</a></li>
 			<li><a th:href="@{logout}">로그아웃</a></li>
 		</ul>
 		<p sec:authorize="hasRole('USER')">일반사용자입니다.</p><!-- 'ROLE_USER' -->

@@ -1,7 +1,10 @@
 package net.softsociety.spring7.dao;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import net.softsociety.spring7.domain.Board;
 import net.softsociety.spring7.domain.Member;
 
 @Mapper
@@ -16,4 +19,8 @@ public interface MemberDAO {
 	Member getMemberInfo(String id);
 	
 	int update(Member member);
+
+	ArrayList<Board> select();
+
+	Board ininsert();
 }

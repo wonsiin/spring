@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript</title>
+<script>
+	window.onload = function test(){
+		let bt1 = document.getElementById("bt1");
+		bt1.onclick=test1;
+	}
+	function test1(){
+		alert('test1');
+	}
+	
+	function test2(){
+		var a = 1;		//재선언 가능
+		let b = 2;		//재선언 불가능
+		const c = 3;	//java에서 파이널 한거랑 같다. 재선언 불가능
+		
+		a = 100;
+		b = "123";
+		//c 는 바뀔수 없다.
+		
+		console.log('a = ' + a);
+		console.log('b = ' + b);
+		console.log('c = ' + c);
+		
+		console.log(typeof(a)); //타입을 알아본다
+		console.log(typeof(b));
+		
+		console.log(isNaN(a));	//숫자로 희석될수 있는 내용인지 확인 근데 타입은 number 지만 false
+		console.log(isNaN(b));
+		
+		console.log(a + 1);
+		console.log(b + 1);
+		
+		console.log(parseInt(b) + 1);
+		console.log(Number(b) + 1);
+		
+		/* 값을 입력받기위한곳 */
+		let d = prompt('정수를 입력하세요.');
+		console.log(typeof(d) + ', ' + d);
+		
+		/* 참 거짓확인하는법 */
+		let e = confirm('질문내용?');
+		console.log(typeof(e) + ', ' + e);
+	}
+	
+	function test3(){
+		let t1 = document.getElementById("text1");
+		let t2 = document.getElementById("text2");
+		let t3 = document.getElementById("text3");
+		let output = document.getElementById("output");
+		
+		/* t3.value = parseInt(t1.value) + parseInt(t2.value); */
+		t3.value = Number(t1.value) + Number(t2.value);
+		output.innerHTML = t3.value
+	}
+	
+	function test4(){
+		let t1 = document.getElementById("text1");
+		let t2 = document.getElementById("text2");
+		let t3 = document.getElementById("text3");
+		let output = document.getElementById("output");
+		let buho = document.getElementById("buho");
+		
+
+		if(buho.value == '+'){
+			t3.value = Number(t1.value) + Number(t2.value);
+			output.innerHTML = t3.value
+		}else if(buho.value == '-'){
+			t3.value = Number(t1.value) - Number(t2.value);
+			output.innerHTML = t3.value
+		}else if(buho.value == '*'){
+			t3.value = Number(t1.value) * Number(t2.value);
+			output.innerHTML = t3.value
+		}else if(buho.value == '/'){
+			t3.value = Number(t1.value) / Number(t2.value);
+			output.innerHTML = t3.value
+		}
+	
+	}
+	function test5(){
+		let t1 = document.getElementById("text1");
+		let output = document.getElementById("output");
+		t1.focus();
+		output.innerHTML = "";
+		
+	}
+
+</script>
+</head>
+<body>
+<form>
+	<h2>[ JavaScript의 기본 문법 ]</h2>
+	<p><a href="javascript:test1()">a태그로 함수 호출</a></p>
+	<p><input type="button" value="onclick속성 이용" onclick="test1()"></p>
+	<p><input type="button" value="onload 에서 이벤트 연결" id="bt1"></p>
+	
+	<p><a href="javascript:test2()">변수와 자료형</a></p>
+
+	<p><a href="javascript:test3()">계산</a></p>
+	<p>
+		<input type="text" id="text1">
+		<select name="buho" id="buho">
+			<option value="+">+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input type="text" id="text2">
+		<input type="text" id="text3">
+		<span id="output"></span>
+	</p>
+	
+	<p><input type="button" onclick="test4()" value="계산">
+	<input type="reset" onclick="test5()" value="초기화"></p>
+</form>
+<!-- blur() : text 칸의 포커스를 벗어나는것 -->
+<!-- focus() : text 칸의 포커스가 간것 -->
+<!-- select() : text 칸의 드래그를 할수있게 해주는것 -->
+</body>
+</html>

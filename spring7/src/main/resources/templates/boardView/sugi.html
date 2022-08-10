@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>[ 글쓰기 ]</h1>
+	<form action="ininsert" method="post">
+	<table>
+		<tr>
+			<td>제목</td>
+			<td><input type="text" name="text"></td>
+		</tr>
+		<tr>
+			<td>내용</td>
+			<td><textarea name="area"></textarea></td>
+		</tr>
+		<tr>
+			<td>파일첨부</td>
+			<td><input type="button" value="파일 선택">선택된 파일 없음</td>
+		</tr>
+	</table>
+		<p><input type="submit" value="저장"></p>
+	</form>
+</body>
+</html>

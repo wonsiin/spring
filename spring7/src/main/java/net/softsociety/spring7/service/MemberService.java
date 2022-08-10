@@ -1,5 +1,8 @@
 package net.softsociety.spring7.service;
 
+import java.util.ArrayList;
+
+import net.softsociety.spring7.domain.Board;
 import net.softsociety.spring7.domain.Member;
 
 public interface MemberService {
@@ -11,4 +14,10 @@ public interface MemberService {
 	Member getMemberInfo(String id);
 
 	int update(Member member);
+
+	ArrayList<Board> select();
+
+
+	
+	
 }

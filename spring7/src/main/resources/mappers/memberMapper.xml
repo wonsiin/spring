@@ -46,4 +46,8 @@
 	memberid = #{memberid}
 </update>
 
+<select id="select" resultType="Board">
+select * from spring7_board
+</select>
+
 </mapper>
