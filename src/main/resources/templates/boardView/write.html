@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	th {
+		background-color: #e6e6e6;
+		width: 100px;
+	}
+	td {
+		background-color: #f2f2f2;
+	}
+</style>
+</head>
+<body>
+	<h1>[ 글쓰기 ]</h1>
+	<form id="writeform" th:action="@{/board/write}" method="post"
+		onsubmit="return validation();" enctype="multipart/form-data"> <!-- 파일을 같이 업로드 할 때는 enctype 반드시 적어줘야! --> <!-- 바이너리 데이터까지 다 첨부 -->
+		<table>
+			<tr>
+				<th>제목</th>
+				<td><input type=text name="title" id="title" style="width: 500px; margin: 5px"></td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td><textarea name="contents" id="contents" style="width: 500px; height: 300px; margin: 5px"></textarea></td>
+			</tr>
+			<tr>
+				<th>첨부파일</th>
+				<td>
+					<input type=file name="upload" size="30"> <!--  value="파일 선택" style="margin: 5px" -->
+					<!-- <div th:if="${originalfile} == null">선택된 파일 없음</div>
+					<div th:if="${originalfile} != null" th:text="${originalfile}"></div> -->
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2" style="background-color: white">
+					<input type="submit" value="저장">
+				</th>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

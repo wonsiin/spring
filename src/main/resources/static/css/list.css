@@ -1,0 +1,46 @@
+@charset "UTF-8";
+	.centerWhite {
+		text-align: center;
+		background-color: white;
+	}
+	input[type="text"] {
+		width: 200px;
+		margin: 20px 0;
+	}
+	.center {
+		text-align: center;
+	}
+	.white {
+		background-color: white;
+	}
+	th {
+		background-color: #e6e6e6;
+		width: 100px;
+	}
+	td {
+		background-color: #f2f2f2;
+	}
+	#home {
+		float: right;
+		width: 50px;
+	}
+    a {
+        text-decoration: none;
+        color: black;
+    }
+    /* visited link */
+    a:visited {
+    color: black;
+    }
+    /* mouse over link */
+    a:hover {
+    font-weight: bold;
+    }
+    
+    /* 게시판 하단 */
+	#navigator {
+	width: 600px;
+	text-align: center;
+	margin: auto;
+	margin-top: 20px;
+}

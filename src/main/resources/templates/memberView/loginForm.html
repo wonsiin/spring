@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	th {
+		background-color: #e6e6e6;
+		width: 150px;
+	}
+	td {
+		background-color: #f2f2f2;
+	}
+</style>
+</head>
+<body>
+	<h1>로그인</h1>
+	<form th:action="@{/member/login}" method="post"> <!-- form의 action과 맞춰야 전달 -->
+	<table>
+		<tr>
+			<th>ID</th>
+			<td><input type="text" name="memberid"><br></td> <!-- 어디로 보낼지 목적지 --> <!-- name 맞춰야 security에 전달 --> <!-- required minlength = "3" maxlength="18"  -->
+		</tr>
+		<tr>
+			<th>PW</th>
+			<td><input type="password" name="memberpw"><br></td> <!-- required minlength = "3" maxlength="18"  -->
+		</tr>
+		<tr>
+			<th colspan="2" style="background-color: white">
+				<div th:if="${param.error}" style="color: red; background-color: #ffe6e6">ID 또는 비밀번호가 틀렸습니다.</div>
+			</th> <!-- error라는 parameter가 있는지만 확인(parameter중에 error라는 애가 있는지 -->
+			<!-- <th colspan="2" style="background-color: white">
+				<div th:if="${param.error}"><script>alert('ID 또는 비밀번호가 틀렸습니다.');</script></div>
+			</th> -->
+		</tr>
+		<tr>
+			<th colspan="2" style="background-color: white"><input type="submit" value="로그인"></th>
+		</tr>
+	</table>
+	</form>
+</body>
+</html>

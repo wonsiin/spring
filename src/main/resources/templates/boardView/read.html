@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/read.css}">
+<script>
+	//글 삭제
+	function deleteBoard(num) {
+		if (confirm('삭제하시겠습니까?')) {
+			location.href = 'delete?boardnum=' + num; // get방식
+		}
+	} // 그냥 이동할거면 js 필요없지만 한번 물어보고 보냄
+	function vaildation() {
+		
+	}
+	function deleteReply(replynum, boardnum) {
+		if(confirm('댓글을 삭제하시겠습니까?')) {
+			location.href = 'deleteReply?replynum=' + replynum;
+		}
+	}
+</script>
+</head>
+<body>
+	<h1>[ 게시판 글읽기 ]</h1>
+	<p><a th:href="@{/}"><img src="../img/home.png" alt="Home" id="home"></a></p> 
+	<table>
+		<tr>
+			<th>작성자</th>
+			<td th:text="${board.memberid}"></td>
+		</tr>
+		<tr>
+			<th>작성일</th>
+			<td th:text="${board.inputdate}"></td>
+		</tr>
+		<tr>
+			<th>조회수</th>
+			<td th:text=${board.hits}></td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td th:text="${board.title}"></td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td th:text="${board.contents}" style="height: 200px"></td>
+		</tr>
+		<tr>
+			<th>파일첨부</th>
+			<td>
+				<!-- <img src = "/board/download?boardnum=${board.boardnum}"> -->
+				<div th:if="${board.originalfile} != null">
+					<img th:src = "@{/board/download(boardnum=${board.boardnum})}" style="width: 650px">
+				</div>
+				<a th:text="${board.originalfile}" th:href="@{/board/download(boardnum=${board.boardnum})}"></a>
+			</td> <!-- 파일 이름 보이고 --> <!-- 이 경로로 이동 --> <!-- 번호를 보내줘야! --> <!-- board.boardnum : 1번 글에 첨부된 파일 내놔라 -->
+		</tr>
+	</table>
+
+<!-- 본인글인 경우 수정/삭제 -->
+	<div th:if="${#authentication.name} == ${board.memberid}">
+		<a th:href="@{/board/update(boardnum=${board.boardnum})}">수정</a> <!-- @{/update(boardnum=${board.boardnum})} --> <!-- @{/board/update} -->
+		<a th:href="|javascript:deleteBoard(${board.boardnum})|">삭제</a>
+	</div>
+	
+	<a th:href="@{/board/list}">목록보기</a>
+
+<!-- 로그인한 경우 댓글 작성 폼 -->
+	<div sec:authorize="isAuthenticated()">
+		<form th:action="@{/board/replyWrite}" method="post" onsubmit="return vaildation();">
+			<input type="hidden" name="boardnum" th:value="${board.boardnum}"> <!-- 글번호 자동으로 넣어서 감 -->
+			<input type="text" name="replytext" id="replytext" style="width:500px;">
+			<input type="submit" value="확인">
+		</form>
+	</div>
+	
+<!-- 댓글 목록 -->
+	<table>
+		<tr th:each="reply : ${replylist}">
+			<th th:text="${reply.memberid}"></th>
+			<td th:text="${reply.replytext}" style="width: 400px;"></td>
+			<td th:text="${reply.inputdate}" style="width: 200px;">
+			<!-- <td style="width: 50px;"><a href="@{/board/updateReply(replynum=${reply.replynum})}" th:if="${#authentication.name} == ${reply.memberid}">[수정]</a></td> -->
+			<td style="width: 50px;">
+				<span th:if="${#authentication.name} == ${reply.memberid}">
+					<a href="|javascript:deleteReply(${reply.replynum}, ${reply.boardnum})|">[삭제]</a> <!-- 삭제하고 페이지를 돌아오는 기능 --> <!-- ${reply.boardnum} : 삭제하러 이 페이지를 떠남. 읽던 글로 돌아와야. 어떤 글을 읽고 있었는지 모르기 때문에 같이 보냄 -->
+				</span>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>

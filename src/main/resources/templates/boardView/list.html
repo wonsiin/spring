@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/list.css}">
+<script>
+	function pagingFormSubmit(currentPage) {
+		let form = document.getElementById('pagingForm');
+		let page = document.getElementById('page');
+		page .value = currentPage;
+		form.submit();
+	}
+</script>
+</head>
+<body>
+	<h1>[ 게시판 ]</h1>
+	
+	<!-- <p><a href="">글쓰기</a></p> 글쓰기 폼으로 이동. 로그인해야 보이는 메뉴 -->
+	<p><a th:href="@{/}"><img src="../img/home.png" alt="Home" id="home"></a></p> <!-- 메인화면으로 이동. 아무나 보임 -->
+
+	<!-- 이하 글목록 출력 영역
+	[[${boardlist}]] -->
+	<p>
+		전체: <span th:text="${navi.totalRecordsCount}"></span>개
+		page: <span th:text="|${navi.currentPage} / ${navi.totalPageCount}|"></span>
+	</p>
+	
+	<table>
+		<tr>
+			<td class="white">전체 : </td>
+			<td class="white"></td>
+			<td class="white"></td>
+			<td class="white"></td>
+			<td class="white">
+				<a th:href="@{/board/write}"><input type="button" value="글쓰기"></a>
+			</td>
+		</tr>
+		<tr>
+		<!-- 공지다 아니다 select 2번 / 추천 기능 / 조회수가 얼마 이상(sql)인 글을 옆에 뭐가 붙어있다던가  -->
+			<th>번호</th>
+			<th style="width: 300px">제목</th>
+			<th>작성자</th>
+			<th>조회수</th>
+			<th>등록일</th>
+		</tr>
+		<tr th:each=" list:${boardlist}">
+			<td th:text="${list.boardnum}" class="center"></td>
+			<td><a th:text="${list.title}" th:href="@{/board/read(boardnum=${list.boardnum})}"></a></td> <!-- http://localhost:9899/spring5/board/read?boardnum=1 -->
+			<td th:text="${list.memberid}" class="center"></td>
+			<td th:text="${list.hits}" class="center"></td>
+			<td th:text="${list.inputdate}" class="center"></td> <!-- 오늘 올라온 글을 시간만 보이게 SELECT문에서 -->
+		</tr>
+	</table>
+	<br>
+	
+<!-- 	<div th:text="${navi}"></div>
+	<div>[[${navi}]]</div>
+	
+	<div id="navigator"> 여러개 필요한 태그에 반복문 붙임
+		<span th:each="counter : ${#numbers.sequence(navi.startPageGroup, navi.endPageGroup)}"> 3번째 숫자가 없으면 1씩 증가
+			<a href="" th:text="${counter}"></a></span>
+	</div>
+	
+	페이지 이동 및 검색 폼 page, type, searchWord
+	<form id="pagingForm" th:action="@{/board/list}" method="get">
+		<input type="hidden" name="page" id="page"> 여러 페이지가 있을 때
+		<select name="type" id="type">
+			<option value="title" th:selected="${type} == 'title'">제목</option> 		value : 실제로 전달되는 값
+			<option value="contents" th:selected="${type} == 'contents'">본문</option> select에 seleted. true면 남기고 false면 지움
+			<option value="memberid" th:selected="${type} == 'memberid'">사용자ID</option>
+			<option value="all" th:selected="${type} == 'all'">전체</option>
+		</select>
+		<input type="text" name="searchWord" th:value="${searchWord}"> 		name : 서버로 전달 / js로 처리 x -> id xx 글자는 value로 넣어주면 되는데 select가 문제
+		<input type="button" value="검색" onclick="pagingFormSubmit(1)">
+	</form> -->
+	
+		<div id="navigator">
+	
+	<!-- 페이지 이동 링크 -->     
+	<a th:href="|javascript:pagingFormSubmit(${navi.currentPage - navi.pagePerGroup})|">◁◁</a>
+	<a th:href="|javascript:pagingFormSubmit(${navi.currentPage - 1})|">◀</a> 
+	
+<!-- 숫자를 보여주기 위한 반복문 -->
+	<span th:each="counter : ${#numbers.sequence(navi.startPageGroup, navi.endPageGroup)}"> 
+		<th:block th:if="${counter == navi.currentPage}"><b></th:block> <!-- if문의 결과 참이든 거짓이든 무조건 없어짐. 별 기능 없는 태그 --> <!-- 지금 보고 있는 페이지랑 반복문의 페이지랑 만나면 다르게 표현하려고(현재 페이지 좀 굵게) 씀 -->
+			<a th:text="${counter}" th:href="|javascript:pagingFormSubmit(${counter})|"></a>&nbsp; <!-- 1, 2, 3, 4, 5. 매번 다른 숫자를 보냄 -->
+		<th:block th:if="${counter == navi.currentPage}"></b></th:block>
+	</span>
+	
+	<a th:href="|javascript:pagingFormSubmit(${navi.currentPage + 1})|">▶</a> 
+	<a th:href="|javascript:pagingFormSubmit(${navi.currentPage + navi.pagePerGroup})|">▷▷</a>
+	<br><br>
+	
+	<!-- 검색폼 -->
+	<form id="pagingForm" method="get" th:action="@{/board/list}">
+		<input type="hidden" name="page" id="page" />
+		<select id="type" name="type">
+			<option value="title" th:selected="${type} == 'title'">제목</option>
+			<option value="contents" th:selected="${type} == 'contents'">본문</option>
+			<option value="memberid" th:selected="${type} == 'memberid'">작성자ID</option>
+			<option value="all" th:selected="${type} == 'all'">전체</option>
+		</select>
+		<input type="text"  name="searchWord" th:value="${searchWord}">
+		<input type="button" onclick="pagingFormSubmit(1)" value="검색">
+	</form>
+	
+	</div>
+
+</body>
+</html>
