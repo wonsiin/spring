@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	#img1{
+		width: 200px;
+		height: 200px;
+	}
+</style>
+<!-- 사용할때마다 불러와줘야한다. -->
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
+<script>
+$(document).ready(function (){
+	/* 	배열로 출력이되는데 html 에서는 처음열만 출력 */
+	$('#bt1').on('click', function(){
+		/* let s = $('h3').html();
+		alert(s); */
+		/* i가 인덱스가 되어 0 부터 차례대로 값이 증가 */
+		/* ob = h3을 저장 */
+		/* 차례대로 처리를 해줌 */
+		$('h3').each(function(i,ob){
+			alert(i + ', '  + $(ob).html());
+		});
+	});
+	/* 텍스트만 읽어오다보니 전체를 다 긁어서 보여준다. */
+	$('#bt2').on('click', function(){
+		let s = $('h3').text();
+		alert(s);
+	});
+	/* text의 내용을 전부 읽어서 보여준다. */
+	$('#bt3').on('click', function(){
+		let s = $('#text1').val();
+		alert(s);
+	});
+	
+	$('#bt4').on('click', function(){
+		$('#div1').html('<p style="color:red;">변경한 내용</p>');
+		$('#div2').text('<p>변경한 내용</p>');
+		$('#text2').val('변경한 내용');
+	});
+	
+	$('#bt5').on('click', function(){
+		let s = $('#img1').attr('src');
+		//img1의 아이디에 해당한 src의 값을 읽어옴
+		//$('#img1').attr('src','../img/button2.png')
+		$('#img1').attr('src','[[@{/img/button2.png}]]');
+		
+	});
+	
+	$('#bt6').on('click', function(){
+		let w = $('#img1').css('width');
+		let h = $('#img1').css('height');
+		
+		$('#img1').css('width','300px');
+		$('#img1').css('height','300px');
+	});
+		/* alert(w + ', ' + h); */
+		// css함수에 1개만 적는건 읽어오는것
+		//css 함수에 2개의 값을 입력하면 수정하는것이다.
+	$('#img1').on('mouseenter', function(){
+		$('#img1').css('width','300px');
+		$('#img1').css('height','300px');
+	});
+	$('#img1').on('mouseleave', function(){
+		$('#img1').css('width','100px');
+		$('#img1').css('height','100px');
+	});
+	$('#bt7').on('click', function(){
+		$('#img1').removeClass('classB');
+		$('#img1').addClass('classA');
+	});
+	
+	$('#bt8').on('click', function(){
+		$('#img1').removeClass('classA');
+		$('#img1').addClass('classB');
+	});
+	
+	
+});
+</script>
+
+<style>
+.classA {
+	width: 100px;
+	height: 100px;
+	background-color: gray;
+	border: 2px solid blue;
+}
+.classB {
+	width: 300px;
+	height: 300px;
+	background-color: yellow;
+	border: 3px dotted red;
+}
+</style>
+</head>
+<body>
+<h2>문서 조작 메소드</h2>
+<pre>
+	html(),text(),val(),attr(),css(),addClass(),removeClass()
+</pre>
+<p><input type="button" id="bt1" value="html()"></p>
+<p><input type="button" id="bt2" value="text()"></p>
+<p><input type="button" id="bt3" value="val()"></p>
+
+	<h3><b>h3</b>태그를 사용한 문자열1</h3>
+	<h3><i>h3</i>태그를 사용한 문자열2</h3>
+	<p><input type="text" id="text1"></p>
+	
+<p><input type="button" id="bt4" value="값 변경"></p>
+	<div id="div1">aaaa</div>
+	<div id="div2">bbbb</div>
+	<p><input type="text" id="text2" value="cccc"></p>
+
+<p><input type="button" id="bt5" value="attr() 함수"></p>
+<p><input type="button" id="bt6" value="css() 함수"></p>
+
+<p><input type="button" id="bt7" value="addClass() 함수"></p>
+<p><input type="button" id="bt8" value="removeClass() 함수"></p>
+
+<p><img th:src="@{/img/button2.png}" id="img1"></p>
+
+
+
+</body>
+</html>
