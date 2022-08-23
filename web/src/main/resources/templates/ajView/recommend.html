@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>JavaScript/jQuery/Ajax</title>
+<style>
+#cnt {
+	border : 2px solid black;
+	border-radius : 5px;
+	background-color: #dddddd;
+	padding: 5px;
+	width: 50px;
+	display: inline-block;
+	text-align: center;
+}
+</style>
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+<script>
+
+$(document).ready(function() {
+	
+	
+	$('#cnt').mouseenter(function(){
+		$.ajax({
+			url: 'vot',
+			method: 'get',
+			dataType: 'text',
+			success: function(n) {
+				$('#cnt').text(n);
+			},
+			error: function() {
+				alert('error');
+			}
+		});
+	});
+	
+	
+	
+	$('#bt').click(function() {
+		$.ajax({
+			url: 'vote',
+			method: 'get',
+			data: {boardnum: $(this).attr('boardnum')},
+			success: function(n) {
+				$('#cnt').html(n);
+			},
+			error: function() {
+				alert('error');
+			}
+		});
+	});
+});
+
+</script>
+</head>
+<body>
+<h2>[ 게시글 추천 ]</h2>
+
+<div>
+	<input type="button" id="bt" boardnum="1" value="추천">
+	<span id="cnt">0</span>
+</div>
+</body>
+</html>

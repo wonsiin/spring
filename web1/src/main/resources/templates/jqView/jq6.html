@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#textDiv {
+	width: 200px;
+	height: 200px;
+	background-color: #cccccc;
+	border: 2px solid black;
+}
+</style>
+<!-- 사용할때마다 불러와줘야한다. -->
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
+<script>
+$(document).ready(function (){
+	/* show 함수를 사용하면 펼쳐지는 듯한 효과를 나타냄 창을 보여줌 */
+	$('#bt1').click(function(){
+		$('#textDiv').show('slow');
+	});
+	/* 창을 가림 */
+	$('#bt2').click(function(){
+		$('#textDiv').hide('slow');
+	});
+	
+	$('#bt3').click(function(){
+		$('#textDiv').toggle('slow');
+	});
+	
+	$('#bt4').click(function(){
+		$('#textDiv').slideDown('slow');
+	});
+	
+	$('#bt5').click(function(){
+		$('#textDiv').slideUp('slow');
+	});
+	
+	$('#bt6').click(function(){
+		$('#textDiv').fadeIn('slow');
+	});
+	
+	$('#bt7').click(function(){
+		$('#textDiv').fadeOut('slow');
+	});
+
+});
+
+</script>
+</head>
+<body>
+	<h2>[ 효과 ]</h2>
+<p>
+	<!-- 창을 생기게 함 -->
+	<input type="button" id ="bt1" value="show()">
+	<!-- 창을 사라지게 함 -->
+	<input type="button" id ="bt2" value="hide()">
+	<!-- 사라졋다가 생겻다 할수 있음. -->
+	<input type="button" id ="bt3" value="toggle()">
+	<!-- 창을 아래로 내리면서 보여줌(사라짐x) -->
+	<input type="button" id ="bt4" value="slideDown()">
+	<!-- 창을 위로 올리면서 가린다(생기게x) -->
+	<input type="button" id ="bt5" value="slideUp()">
+	<!-- 화면이 전체면이 천천히 등장함 사라지게는x -->
+	<input type="button" id ="bt6" value="fadeIn()">
+	<!-- 화면이 전체면이 천천히 사라짐 생기게는 x -->
+	<input type="button" id ="bt7" value="fadeOut()">
+</p>
+<div id="textDiv">
+	<p>DIV 태그 내의 문자열</p>
+	<p>DIV 태그 내의 문자열</p>
+	<p>DIV 태그 내의 문자열</p>
+</div>
+</body>
+</html>

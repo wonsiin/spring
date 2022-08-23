@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	let win = null; // 다른 함수에서도 win이라는 객체 다룰 수 있음
+	
+	function test1() {
+		win = window.open('', 'w', 'width=300,height=300,left=600,top=300'); // 보통 문자열 3개를 연결하여 오픈 "url", 같은 이름이라면 내용만 교체
+	}
+	function test2() {
+//		alert(win);
+//		alert(win.closed);
+		
+		// null이 아니고 닫혀있지 않을 때만 closed
+		if(win != null && !win.closed) {
+			win.close();	
+		}
+	}
+	function test3() {
+		// 그 창이 있고 열려있기도 하면 window에 크기 변경, 위치 변경
+		if(win != null && !win.closed) {
+			win.resizeTo(800, 500);	// 절대적인 사이즈 바로 적용 resizeto / 상대적인 크기 resizeby
+			win.moveTo(400, 200);
+			win.focus(); // window의 활성화 : focus
+		}
+	}
+	
+	function test4() { // screen 객체
+		alert('가로 : ' + screen.width + '\n세로 : ' + screen.height); // 가로, 세로 해상도
+	}
+	function test5() { // location 객체
+		alert(location.href);						//현재 경로
+		location.href = 'http://www.naver.com'; 	//이동
+	}
+	function test6() { // history 객체
+		history.go(-1); 							//뒤로 이동
+	}
+	function test7() { // navigator 객체
+		alert(navigator.userAgent); 				//브라우저 정보 // userAgent에 대한 정보를 문자열 하나로 보여줌 // Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+		
+		let words = ['Mobile', 'SAMSUNG', 'iPhone'] // 찾을 단어가 많으면 배열, 반복문으로 이용
+		
+		if(navigator.userAgent.includes('Mobile')) { // Mozilla/5.0 (Linux;Android 11; SM-N976N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Mobile Sagari/537.36
+			location.href = 'mobile';
+		} // 반응형 웹 CSS 여러개 준비. 해상도에 따라 CSS만 바꿔치기 해서 모바일용, PC용 다르게 보이게 할 수도!
+	}
+</script>
+</head>
+<body>
+	<h2>[ JavaScript의 내장 객체 ]</h2>
+
+	<p><a href="javascript:test1()">window 객체 - 창 열기</a><p>
+	<p><a href="javascript:test2()">window 객체 - 창 닫기</a><p>
+	<p><a href="javascript:test3()">window 객체 - 창의 크기와 위치 변경</a><p>
+	<p><a href="javascript:test4()">screen 객체</a><p>
+	<p><a href="javascript:test5()">location 객체</a><p>
+	<p><a href="javascript:test6()">history 객체</a><p>
+	<p><a href="javascript:test7()">navigator 객체</a><p>
+	
+</body>
+</html>

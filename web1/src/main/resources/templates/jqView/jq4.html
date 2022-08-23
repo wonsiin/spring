@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 사용할때마다 불러와줘야한다. -->
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
+<script>
+$(document).ready(function (){
+	$('#bt1').click(test1);
+	$('#bt2').click(test2);
+	$('#bt3').click(test3);
+	$('#bt4').click(test4);
+});
+function test1(){
+	let ar1 = [ 10, 20];
+	let ar2 = [];
+	let ar3 = new Array();
+	let ar4 = new Array(5);
+	
+	console.log(ar1);
+	console.log(ar1.length);
+	console.log(ar1[0]);
+	console.log(ar2);
+	console.log(ar3);
+	console.log(ar4);
+	
+	ar1.fill(10);			//모든 요소에 10 대입
+	console.log(ar1);
+	ar1[0] = 5;				//0번 요소오 5 대입
+	ar1[3] = 100;			//3번 요소에 100 대입, 없는 부분은 생성
+	console.log(ar1.pop());	//맨 뒤에서 읽고 삭제
+	ar1.splice(2,1);		//2번 요소부터 1개 삭제
+	ar1.shift();			//왼쪽으로 쉬프트
+	ar1.unshift(100);		//맨 앞에 100 추가하고 오른쪽으로 이동
+	ar1.reverse();			//역순으로 재배치
+}
+function test2(){
+	let arNum = [ 10,20,30];
+	
+	$.each(arNum, function(i, n) {
+		console.log('i = ' + i + ', n = ' + n);
+	});
+	
+	
+}
+function test3(){
+	let arNum = [ 10,20,30];
+	
+	$(arNum).each(function(i, n) {
+		console.log('i = ' + i + ', n = ' + n);
+	});
+}
+function test4(){
+	let arObject = [{num:10, id:'aaa', title:'제목1'},
+					{num:20, id:'bbb', title:'제목2'},
+					{num:30, id:'ccc', title:'제목3'}];
+	$(arObject).each(function(i, n) {
+		console.log('ID=' + n.id + ', 제목 = ' + n.title);
+	});
+}
+
+</script>
+</head>
+<body>
+<h2>[ 배열과 each() ]</h2>
+
+<p><input type="button" id="bt1" value="배열사용하기 1"></p>
+<p><input type="button" id="bt2" value="배열사용하기 2"></p>
+<p><input type="button" id="bt3" value="배열사용하기 3"></p>
+<p><input type="button" id="bt4" value="배열사용하기 4"></p>
+
+</body>
+</html>

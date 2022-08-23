@@ -2,58 +2,61 @@
 <html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- 사용할때마다 불러와줘야한다. -->
+<title>jQuery</title>
+<style>
+</style>
 <script th:src="@{/js/jquery-3.6.0.js}"></script>
 
 <script>
-/* jquery 에서는 $로 사용하며 객체는 ()안에 넣어줘야한다. .뒤에는 메소드를 넣는다.*/
-$(document).ready(function (){
-	//전체 선택자  *부분에 tag,class,id등 여러가지 적을수 있다.
-	$('*').css('color','blue');
+$(document).ready(function() {
+	//전체 선택자
+	$('*').css('color', 'blue');
 	//태그 선택자
-	$('p').css('color','green');
+	$('p').css('color', 'green');
 	//ID 선택자
-	$('#text1').css('color','red');
-	//class 선택자
-	$('.text2').css('color','pink');
+	$('#text1').css('color', 'pink');
+	//클래스 선택자
+	$('.text2').css('color', 'red');
 	//그룹 선택자
-	$('h2, div').css('color','yellow');
-	/* $('h2 div').css('color','yellow'); */
-	//자식 선택자
-	$('body>p').css('color','FireBrick');
-	//하위요소 선택자
-	$('body p').css('color','GoldenRod');
-	
-	$('p.text3').css('color','Brown');
-	$('p.text3').css('border','1px solid blue');
-	
-	$('body div p.text3').css('color','BlueViolet');
+	$('th, td').css('color', 'yellow');
+	//종속 선택자
+	$('p.text2').css('color', 'DarkMagenta');
+	//하위 요소
+	$('div p.text3').css('color', 'Coral');
+	//자식 요소
+	$('div > p.text3').css('color', 'Coral');
+	$('div > p.text3').css('border', '1px solid black');
+
 	//속성 선택자
 	$('input[type=password]').css('background-color', 'yellow');
+	$('input[checked]').css('background-color', 'yellow');
 	
 });
+
 </script>
 </head>
 <body>
-	<h2 class="text3">[ JQuery의 기본 문법 , 선택자 ]</h2>
-	
-	<p>p태그를 이용한 텍스트</p>
-	<p>p태그를 이용한 텍스트</p>
-	<p id="text1">p태그를 이용한 텍스트</p>
-	<p class="text2">p태그를 이용한 텍스트</p>
-	<p class="text2 text3">p태그를 이용한 텍스트</p>
+<h2>[ jQuery 기본 문법, 선택자 ]</h2>
+<h3 class="text2">https://jquery.com/ </h3>
 
-	<div>
-		<p>div내의 p태그</p>
-		<p class="text3">div내의 p태그</p>
-	</div>
-	
-	<form>
-		<input type="text">
-		<input type="password">
-		<input type="number">
-		<input type="submit" value="전송">
-	</form>
+<p>p태그를 이용한 텍스트</p>
+<p>p태그를 이용한 텍스트</p>
+<p id="text1">p태그를 이용한 텍스트</p>
+<p class="text2">p태그를 이용한 텍스트</p>
+<p class="text2 text3">p태그를 이용한 텍스트</p>
+
+<div>
+	<p>div내의 p태그</p>
+	<p class="text3">div내의 p태그</p>
+</div>
+
+<form>
+	<input type="text">
+	<input type="password">
+	<input type="submit" value="확인">
+</form>
+
 </body>
 </html>
+
+

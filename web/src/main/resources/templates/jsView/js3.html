@@ -1,40 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>[ JavaScript 기타 함수 ]</title>
+<title>JavaScript</title>
 <style>
-
 </style>
 <script>
-function outputData(){
+function outputDate() {
 	let date = new Date();
-	
-	let yea = date.getFullYear() + '년' + (date.getMonth()+1) +'월' + date.getDate()+'일' 
-	+ date.getHours()+'시'+date.getMinutes()+'분'+date.getSeconds() + '초';
-	
-	document.getElementById('output').innerHTML = yea;
+	let time = date.getFullYear() + '년 ' + date.getMonth() + '월 ' + date.getDate() + '일 '
+		+ date.getHours() + '시 ' + date.getMinutes() + '분 ' + date.getSeconds() + '초';
+	document.getElementById('output').innerHTML = time;
+}
+function timeout() {
+	setTimeout(outputDate, 3000);
 }
 
-function outputtest(){
-	let date = new Date();
-	
-	let yea = date.getFullYear() + '년' + (date.getMonth()+1) +'월' + date.getDate()+'일' 
-	+ date.getHours()+'시'+date.getMinutes()+'분'+date.getSeconds() + '초';
-	
-	document.getElementById('sta').innerHTML = yea;
-}
-
-function timeout(){
-	let time = setTimeout(outputData,3000);
-}
 let inter = null;
-function start(){
-	document.getElementById('output').innerHTML = "";
-	inter = setInterval(function (){outputtest()},100);
-}
 
-function stop(){
+function start() {
+	inter = setInterval(outputDate, 1000);
+}
+function stop() {
 	clearInterval(inter);
 }
 
@@ -42,39 +29,36 @@ let win = null;
 let winInter = null;
 
 function winStart() {
-	winInter = setInterval(function (){
-		if(win == null || win.closed) {
-			win =window.open('', '', 'width=200,height=200,left=100,top=200');
-		}
- 			win.resizeBy(2,2);
-			win.moveBy(5,5);
-			win.focus();
-	},1000);
+	//창이 없으면 열고 일정시간 간격으로 움직임
+	winInter = setInterval(winOpen, 1000);
 }
-function winstop(){
+function winStop() {
+	//일정시간 간격으로 실행하던 작업 취소하고 창 닫음
 	clearInterval(winInter);
 	win.close();
 }
-
-
+function winOpen() {
+	if (win == null || win.closed) {
+		win = window.open('', 'win', 'width=200,height=200,left=200,top=200');
+	}
+	win.moveBy(10, 0);
+	win.focus();
+}
 </script>
 </head>
 <body>
-	<h2>[ JavaScript 기타 함수 ]</h2>
-	
-	<p><a href="javascript:outputData()">날짜 객체 사용</a></p>
-	<p><span id="output"></span></p>
-	
-	<p><a href="javascript:timeout()">setTimeout 실행</a></p>
-	<p><span id="time"></span></p>
-	
-	<p><a href="javascript:start()">setInterval 실행</a></p>
-	<p><a href="javascript:stop()">clearInterval 실행</a></p>
-	<p><span id="sta"></span></p>
-	
-	<p><a href="javascript:winStart()">윈도우 이동</a></p>
-	<p><a href="javascript:winstop()">윈도우 이동 중지</a></p>
-	
-	
+<h2>[ JavaScript 기타 함수 ]</h2>
+
+<p><a href="javascript:outputDate()">날짜 객체</a></p>
+<p><span id="output"></span></p>
+
+<p><a href="javascript:timeout()">setTimeout() 실행</a></p>
+<p><a href="javascript:start()">setInterval() 실행</a></p>
+<p><a href="javascript:stop()">setInterval() 중지</a></p>
+
+<p><a href="javascript:winStart()">창 이동 시작</a></p>
+<p><a href="javascript:winStop()">창 이동 중지</a></p>
+
+
 </body>
 </html>

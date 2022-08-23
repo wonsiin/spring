@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 사용할때마다 불러와줘야한다. -->
+<script th:src="@{/js/jquery-3.6.0.js}"></script>
+
+<script>
+function test1(){
+	alert('test1()실행');
+	$.ajax({
+		url:'test1',
+		type:'get',
+		success:function(){
+			alert('성공');
+		},
+		error:function(){
+			alert('실패');
+		}
+	});
+	//ajax는 작업을 하는도중이라도 결과를 보내고 할일을 진행한다.
+	alert('test1() 함수 끝');
+}
+
+function test2(){
+	$.ajax({
+		url:'test2',
+		type: 'post',
+		data:{str:'서버로 보낼 문자열'},
+		success: function(){
+			alert('성공');
+		},
+		error: function(e){
+			alert('실패');
+			/* err를 문자열로 받을때 사용 */
+			/* {1단 : "readyState":4,
+				2단 : "responseText":"{\"timestamp\":\"2022-08-16T06:10:40.122+00:00\",\"status\":404,\"error\":\"Not Found\",\"message\":\"No message available\",\"path\":\"/web/aj/test222\"}"
+				3단 : ,"responseJSON":{"timestamp":"2022-08-16T06:10:40.122+00:00","status":404,"error":"Not Found","message":"No message available","path":"/web/aj/test222"},
+				4단 : "status":404,"statusText":"error"} */
+			alert(JSON.stringify(e));
+			alert(e.status);
+		}
+	});
+}
+
+function test3(){
+	$.ajax({
+		url : 'test3',
+		type : 'get',
+		dataType : 'text',
+		success: function(res){
+			alert(res);
+			$('#output').html(res);
+			//화면 div에 집어넣기
+		},
+		error : function(e){
+			JSON.stringify(e);
+		}
+	})
+}
+function test4(){
+	$.ajax({
+		url:'test4',
+		type:'post',
+ 		data:{word1:$('#word1').html()},
+ 		dataType:'text',
+		success:function(re){
+			$('#word2').html(re);
+		},
+		error:function(e){
+			JSON.stringify(e);
+		}
+		/* 페이지 이동 없이 요청을 보냄 */
+	});
+}
+
+</script>
+</head>
+<body>
+	<h2 class="text3">[ Ajax 요청과 응답 ]</h2>
+	
+	<p><a href="javascript:test1()">서버로 Ajax 요청 보내기</a></p>
+	<p><a href="javascript:test2()">서버로 문자열 보내기</a></p>
+	<p><a href="javascript:test3()">서버에서 문자열 받기</a></p>
+<div id="output"></div>
+	<p><a href="javascript:test4()">예제</a></p>
+<div id="word1">abcdefg</div>
+<div id="word2"></div>
+
+</body>
+</html>
